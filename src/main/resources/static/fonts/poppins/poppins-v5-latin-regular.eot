@@ -1,0 +1,225 @@
+package com.springboot.restcontroller;
+
+import java.io.IOException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
+
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.springboot.feign.MicroService2Consumer;
+
+@RestController
+@RequestMapping("/api/rest")
+public class ConsumerRestController {
+
+	@Autowired
+	private DiscoveryClient discoveryClient;
+
+	@Autowired
+	private RestTemplate restTemplate;
+
+	// with using loadBalancerClient after adding ribbon dependency in pom.xml.
+	// make sure multiple server instances are running for microservice2.
+	@Autowired
+	private LoadBalancerClient loadBalancerClient;
+
+	// using feign client
+	@Autowired
+	private MicroService2Consumer microService2Consumer;
+
+	/**
+	 * ##########################################################################################
+	 * Using discoveryClient
+	 * ##########################################################################################
+	 */
+	@RequestMapping("/service-instances/{applicationName}")
+	public List<ServiceInstance> serviceInstancesByApplicationName(@PathVariable String applicationName) {
+		return this.discoveryClient.getInstances(applicationName);
+	}// Test URL=
+		// http://localhost:<randomport>/api/rest/service-instances/microservice1
+		// http://localhost:<randomport>/api/rest/service-instances/microservice2
+
+	@RequestMapping("/call_ms2_01")
+	public String getRespMessage() throws RestClientException, IOException {
+
+		List<ServiceInstance> instances = discoveryClient.getInstances("microservice2");
+		ServiceInstance serviceInstance = instances.get(0);
+		String baseURL = serviceInstance.getUri().toString();
+		baseURL = baseURL + "/hello";
+
+		// here RestTemplate is not load balanced.
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> response = null;
+		try {
+			response = restTemplate.exchange(baseURL, HttpMethod.GET, getHeaders(), String.class);
+		} catch (Exception e) {
+			// System.out.println(e);
+			// throw e;
+		}
+		return response.getBody().toString();
+
+	}// http://localhost:<randomport>/api/rest/call_ms2_01
+	
+	@RequestMapping("/call_ms2_01_02")
+	public String getData() throws RestClientException, IOException {
+
+		List<ServiceInstance> instances = discoveryClient.getInstances("USERS-MICROSERVICE");
+		ServiceInstance serviceInstance = instances.get(0);
+
+		String baseUrl = serviceInstance.getUri().toString();
+
+		baseUrl = baseUrl + "/users/status/check";
+
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> response = null;
+		try {
+			response = restTemplate.exchange(baseUrl, HttpMethod.GET, getHeaders(), String.class);
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+		
+		//System.out.println(response.getBody());
+		return response.getBody().toString();
+	}
+
+	/**
+	 * ##########################################################################################
+	 * Using restTemplate
+	 * ##########################################################################################
+	 */
+
+	// calling microservice2 using restTemplate without Hystrix fallback, it
+	// will raise exception if ms2 is down.
+
+	@RequestMapping("/call_ms2_02")
+	public String getResponsefromMicroservice2() {
+		// RestTemplate restTemplate = new RestTemplate();
+		return restTemplate.getForObject("http://microservice2/hello", String.class);
+	}// http://localhost:<randomport>/api/rest/call_ms2_02
+
+	// calling microservice2 using restTemplate with Hystrix fallback .
+	@HystrixCommand(fallbackMethod = "getResponsefromOtherMicroservice2Backup")
+	@RequestMapping("/call_ms2_03")
+	public String getResponsefromOtherMicroservice() {
+		// RestTemplate restTemplate = new RestTemplate();
+		String resp = restTemplate.getForObject("http://microservice2/hello/", String.class);
+		return resp;
+	}// http://localhost:<randomport>/api/rest/call_ms2_03
+
+	@HystrixCommand(fallbackMethod = "getResponsefromOtherMicroservice2Backup")
+	@RequestMapping("/call_ms2_04")
+	public String getrespMsg() throws RestClientException, IOException {
+
+		String baseUrl = "http://microservice2/hello";
+		ResponseEntity<String> response = null;
+		try {
+			response = restTemplate.exchange(baseUrl, HttpMethod.GET, getHeaders(), String.class);
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+		return response.getBody().toString();
+	}// http://localhost:<randomport>/api/rest/call_ms2_04
+	
+	@RequestMapping("/client/ribbon")
+	public String hi() {
+		String randomString = this.restTemplate.getForObject("http://microservice2/hello", String.class);
+		return "Server Response :: " + randomString;
+	}//http://localhost:8888/client/ribbon
+
+	// fallback method
+	public String getResponsefromOtherMicroservice2Backup() {
+		System.out.println("fallback method executed");
+		return "default msg";
+	}
+
+	// headers
+	private static HttpEntity<?> getHeaders() throws IOException {
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+		return new HttpEntity<>(headers);
+	}
+
+	/**
+	 * ##########################################################################################
+	 * Using loadBalancerClient
+	 * ##########################################################################################
+	 */
+
+	@RequestMapping("/call_ms2_05")
+	public String getRespMsg2() throws RestClientException, IOException {
+		ServiceInstance si = loadBalancerClient.choose("microservice2");
+		String baseUrl = si.getUri().toString();
+		baseUrl = baseUrl + "/hello";
+
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> response = null;
+		try {
+			response = restTemplate.exchange(baseUrl, HttpMethod.GET, getHeaders(), String.class);
+		} catch (Exception ex) {
+			//System.out.println(ex);
+			//throw ex;
+		}
+		// System.out.println(response.getBody());
+		return response.getBody().toString();
+	}// http://localhost:<randomport>/api/rest/call_ms2_05
+	
+	@RequestMapping("/call_ms2_05_02")
+	public String getData3() throws RestClientException, IOException {
+
+		ServiceInstance serviceInstance = loadBalancerClient.choose("users-microservice");
+		System.out.println(serviceInstance.getUri());
+		String baseUrl = serviceInstance.getUri().toString();
+		baseUrl = baseUrl + "/users/status/check";
+		System.out.println("baseUrl => " + baseUrl);
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<String> response = null;
+		try {
+			response = restTemplate.exchange(baseUrl, HttpMethod.GET, getHeaders(), String.class);
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+		System.out.println(response.getBody());
+		return response.getBody().toString();
+	}
+
+	/**
+	 * ##########################################################################################
+	 * Using Feign client
+	 * ##########################################################################################
+	 */
+	@RequestMapping("/call_ms2_06/hello")
+	public String getMsg1() {
+		return microService2Consumer.getMsg1();
+	}// http://localhost:52599/api/rest/call_ms2_06/hello
+
+	@RequestMapping("/call_ms2_07/hello/{name}")
+	public String getMsg2(@PathVariable String name) {
+		return microService2Consumer.getMsg2(name);
+	}// http://localhost:52599/api/rest/call_ms2_07/hello/punya
+
+	@RequestMapping("/call_ms2_08/hello/{name}")
+	public String getResp(@PathVariable String name) throws RestClientException, IOException {
+		String response = null;
+		try {
+			response = microService2Consumer.getMsg2(name);
+		} catch (Exception e) {
+			// System.out.println(e);
+			// throw e;
+		}
+		return response;
+	}// http://localhost:52599/api/rest/call_ms2_08/hello/lipun
+
+}                                                                                                                                                              
