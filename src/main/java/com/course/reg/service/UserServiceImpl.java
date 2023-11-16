@@ -137,4 +137,9 @@ public class UserServiceImpl implements UserService {
 	public void updateCourse(Course course) {
 		coursesRepository.save(course);
 	}
+
+	@Override
+	public List<UserReg> getAllUsers() {
+		return usersRepository.findAll();
+	}
 }

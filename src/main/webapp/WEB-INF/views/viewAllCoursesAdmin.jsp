@@ -168,6 +168,7 @@ footer a {
 		<nav class="navbar">
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/view/profile">My Profile</a></li>
+				<li><a href="${pageContext.request.contextPath}/view/users">All Users</a></li>
 			</ul>
 		</nav>
 	</header>

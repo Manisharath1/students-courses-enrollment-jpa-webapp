@@ -18,6 +18,7 @@ public interface UserService extends UserDetailsService{
 	//public void updateContctPicNameForCurrentLoggedInUsername(String contactPicfileName, Long contactId);
 	public List<Course> getAllEnrolledCoursesByLoginUsername(String loginUsername);
 	public List<Course> getAllCourses();
+	public List<UserReg> getAllUsers();
 	//public String enrollTopicName(String loginusername,String topicName);
 	public Optional<List<Course>> searchAllTopicsByTopicName(String topicName);
 	public String saveCourse(Course course);

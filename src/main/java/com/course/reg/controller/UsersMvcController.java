@@ -77,6 +77,13 @@ public class UsersMvcController {
 		if (result.hasErrors()) {
 			return "userRegistrationForm";
 		}
+		
+		if(userRegistration.getLoginUsername() != null && !userRegistration.getLoginUsername().isBlank()) {
+			UserReg user = userService.findUserProfileByLoginUsername(userRegistration.getLoginUsername());
+			if(user !=null)
+				return "userExists";
+		}
+		
 		userService.saveUserRegistration(userRegistration);
 		map.put("resp", "Registration Successful");
 		return "userRegistrationForm";
@@ -182,6 +189,22 @@ public class UsersMvcController {
 
 	}
 	
+	@GetMapping(value = "/view/users")
+	public String allUsers(ModelMap map) {
+		
+		List<UserReg> usersList = userService.getAllUsers();
+		map.put("usersList", usersList);
+		
+		//String loginUserName = securityUtil.getLoginUsername();
+		//if (loginUserName != null && !loginUserName.equals("anonymousUser")) {
+			//UserDetails details = userService.loadUserByUsername(loginUserName);
+			//if (details != null && details.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+				return "viewAllUsersAdmin";
+			//}
+		//}
+		//return "viewAllUsers";
+	}
+	
 	
 	@GetMapping(value = "/enroll/{topicName}")
 	public String enrollTopicName(@PathVariable(name = "topicName", required = true) String topicName, ModelMap map) {
@@ -225,35 +248,35 @@ public class UsersMvcController {
 			return "viewAllCourses";
 		}*/
 
-	@GetMapping(value = "/course/form")
-	public String getAddCourseFormPage(ModelMap model) {
-		model.addAttribute("course", new Course());
-		return "addCourseForm";
-	}
-
-	@GetMapping(value = "/edit/courseForm/{topicName}")
-	public String updateCourseFormPage(@PathVariable String topicName, ModelMap map) {
-		Course course = userService.getCourseByTopicName(topicName);
-		map.addAttribute("course", course);
-		return "updateCourseForm";
-	}
-
-	@PostMapping(value = "/course/save")
-	public String saveCourse(@Valid @ModelAttribute Course course, BindingResult br, ModelMap map) {
-		if (br.hasErrors()) {
+		@GetMapping(value = "/course/form")
+		public String getAddCourseFormPage(ModelMap model) {
+			model.addAttribute("course", new Course());
 			return "addCourseForm";
 		}
-		String reg = userService.saveCourse(course);
-		map.put("reg", reg);
-		return "courseAddSuccess";
-	}
 
-	@PostMapping(value = "/course/update")
-	public String updateCourse(@Valid @ModelAttribute Course course, BindingResult br) {
-		if (br.hasErrors()) {
+		@GetMapping(value = "/edit/courseForm/{topicName}")
+		public String updateCourseFormPage(@PathVariable String topicName, ModelMap map) {
+			Course course = userService.getCourseByTopicName(topicName);
+			map.addAttribute("course", course);
 			return "updateCourseForm";
 		}
-		userService.updateCourse(course);
-		return "redirect:/view/courses";
-	}
+
+		@PostMapping(value = "/course/save")
+		public String saveCourse(@Valid @ModelAttribute Course course, BindingResult br, ModelMap map) {
+			if (br.hasErrors()) {
+				return "addCourseForm";
+			}
+			String reg = userService.saveCourse(course);
+			map.put("reg", reg);
+			return "courseAddSuccess";
+		}
+
+		@PostMapping(value = "/course/update")
+		public String updateCourse(@Valid @ModelAttribute Course course, BindingResult br) {
+			if (br.hasErrors()) {
+				return "updateCourseForm";
+			}
+			userService.updateCourse(course);
+			return "redirect:/view/courses";
+		}
 }

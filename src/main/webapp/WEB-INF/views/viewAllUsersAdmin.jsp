@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Add Course</title>
+
+<title>All Courses</title>
 <style type="text/css">
+
 * {
 	margin: 0px;
 	padding: 0px;
@@ -15,6 +15,7 @@
 /*####################################################################################################
 	header section
     ####################################################################################################*/
+    
 header {
 	margin: auto;
 	/* border: 2px solid red; */
@@ -35,12 +36,14 @@ h1 {
 	text-align: center;
 	margin-top: 0px;
 	color: white;
-	padding-top:20px;
+	padding-top: 25px;
+	padding-bottom: 20px;
 	text-decoration: underline;
 }
 
 .navbar {
 	background-color: orange;
+	//padding-top: 10px;
 	/* border-radius: 10px; */
 	/* border: 2px solid red; */
 }
@@ -58,7 +61,7 @@ h1 {
 
 .navbar li a {
 	color: white;
-	padding: 5px 30px;
+	padding: 3px 30px;
 	text-decoration: none;
 }
 
@@ -71,7 +74,7 @@ main or body content
 ######################################################################################################*/
 main {
 	width: 100%;
-	height: 65.3vh;
+	height: 70.3vh;
 	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),url('/images/2.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -140,9 +143,9 @@ section .btn_signup {
 footer {
 	width: 100%;
 	height: 5vh;
-	/*background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), url('../images/showcase.jpg');*/
-	/*background-repeat: no-repeat;*/
-	/*background-size: cover;*/
+	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)),url('../images/showcase.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
 	background-color: #5d2e2e;
 	text-align: center;
 	padding-top: 5px;
@@ -158,68 +161,58 @@ footer a {
 </style>
 </head>
 <body>
+<!-- ######################################## Header  content  ################################## -->
 	<header>
 		<!-- <img src="static/images/punya.PNG" alt="photo"> -->
-		<h1>Welcome To Course Enrollment App</h1>
+		<h1 color="cyan">Welcome To Course Registration APP</h1>
 		<nav class="navbar">
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/view/courses">All Courses</a></li>
-				<%-- <li><a href="${pageContext.request.contextPath}/view/enrolledcourses">My EnrolledCourses</a></li> --%>
 				<li><a href="${pageContext.request.contextPath}/view/profile">My Profile</a></li>
 			</ul>
 		</nav>
 	</header>
-	<h2 align="center">
-		Welcome ${pageContext.request.userPrincipal.name} | <a
-			onclick="document.forms['logoutForm'].submit()">Logout</a>
-	</h2>
-	<c:if test="${pageContext.request.userPrincipal.name != null}">
-		<form id="logoutForm" method="POST" action="${contextPath}/logout">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		</form>
-	</c:if>
+	<br>
+	<br>
+ 	<h2 align="center">Welcome ${pageContext.request.userPrincipal.name} |  <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+	 <c:if test="${pageContext.request.userPrincipal.name != null}">
+        <form id="logoutForm" method="POST" action="${contextPath}/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+    </c:if>
+    <!-- ######################################## Body  content  ################################## -->
 	<main>
-		<section>
-			<h1>
-				<u> Add New Course </u>
-			</h1>
-			<form:form action="${pageContext.request.contextPath}/course/save" method="POST" modelAttribute="course">
-				<table>
+	<section>
+		<%-- <form action="<c:url value="/admin/search/user"/>">
+			Search By User Name:<input type="text" name="userName" placeholder="Enter Topic name"/>
+			<button>Search</button>
+		</form > --%>
+		
+		<H1 color="green">All Users</H1>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Email ID</th>
+					<th>Mob No</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${usersList}" var="user">
 					<tr>
-						<td>Course Name :</td>
-						<td><form:input path="courseName" /></td>
-						<td><form:errors path="courseName" cssClass="errormsg" /></td>
+						<td align="center">${user.firstName}</td>
+						<td align="center">${user.lastName}</td>
+						<td align="center">${user.emailId}</td>
+						<td align="center">${user.mobileNo}</td>
 					</tr>
-					<tr>
-						<td>Topic Name :</td>
-						<td><form:input path="topicName" /></td>
-						<td><form:errors path="topicName" cssClass="errormsg" /></td>
-					</tr>
-					<tr>
-						<td>Ref Url Text :</td>
-						<td><form:input path="refUrlText" /></td>
-						<td><form:errors path="refUrlText" cssClass="errormsg" /></td>
-					</tr>
-					<%-- <tr>
-						<td>Contact Date Of Birth :</td>
-						<td><form:input type="date" path="contactDob" /></td>
-						<td><form:errors path="contactDob" cssClass="errormsg" /></td>
-					</tr> --%>
-					<tr>
-						<td>Ref Url Video :</td>
-						<td><form:input path="refUrlVideo" /></td>
-						<td><form:errors path="refUrlVideo" cssClass="errormsg" /></td>
-					</tr>
-					<tr>
-						<td colspan="2" align="right"><input type="reset"
-							value="Reset" />&nbsp;<input type="submit" value="Save" /></td>
-					</tr>
-				</table>
-			</form:form>
-		</section>
+				</c:forEach>
+			</tbody>
+		</table>
+	</section>
 	</main>
+	<!-- ######################################## footer content ########################################-->
 	<footer>
-		<a href="#">copy_write@manisha's_blog_spot</a>
+		<a href="#">copy_write@manisha_blog_spot</a>
 	</footer>
 </body>
 </html>
