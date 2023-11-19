@@ -8,42 +8,6 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">"Welcome To Back to Your Learning Journey!"</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</nav> -->
-<br /><br />
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-        
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="text-center">login Form</h2>
-                </div>
-                <div class="card-body">
-                    <form
-                            method="post"
-                            role="form"
-                            action="/login"
-                            class="form-horizontal"
-                    >
-                        <div class="form-group mb-3">
-                            <label class="control-label">Username:</label>
-                            <input
-                                    type="text"
-                                    id="username"
-                                    name="username"
-                                    class="form-control"
-                                    placeholder="Enter login username"
-                            />
-                        </div>
-
-<body>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6 offset-md-3">

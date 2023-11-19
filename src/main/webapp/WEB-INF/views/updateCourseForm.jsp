@@ -180,12 +180,13 @@ footer a {
 <main>
    <section>
 	<h1><u>Edit Course Details</u></h1>
-	<form:form method="POST" action="${pageContext.request.contextPath}/course/update" modelAttribute="course">
+	<form:form method="POST" action="${pageContext.request.contextPath}/course/update" modelAttribute="courseUpdate">
 		<table>
-			<%-- <tr>
-				<td></td>
-				<td><form:hidden path="id" /></td>
-			</tr> --%>
+			<tr>
+				<td>Course Id</td>
+				<td><form:input path="courseid" readonly="true"/></td>
+			</tr>
+			
 			<tr>
 				<td>Course Name :</td>
 				<td><form:input path="courseName" /></td>
@@ -193,7 +194,7 @@ footer a {
 			</tr>
 			<tr>
 				<td>Topic Name :</td>
-				<td><form:input path="topicName" readonly="true"/></td>
+				<td><form:input path="topicName"/></td>
 				<td><form:errors path = "topicName" cssClass = "errormsg" /></td>
 			</tr>
 			<tr>

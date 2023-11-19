@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users_enrolled_courses_details")
-public class UserCourseReg {
+public class UserCourseEnroll {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,9 +20,9 @@ public class UserCourseReg {
 	//@Column(name = "topic_name")
 	private String topicName;
 	
-	public UserCourseReg() {}
+	public UserCourseEnroll() {}
 	
-	public UserCourseReg(String login_username, String topicName) {
+	public UserCourseEnroll(String login_username, String topicName) {
 		super();
 		this.loginUsername = login_username;
 		this.topicName = topicName;

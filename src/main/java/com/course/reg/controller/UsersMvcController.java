@@ -63,7 +63,7 @@ public class UsersMvcController {
 			model.addAttribute("error", "Login Username and Pasword does not match");
 		if (logout != null)
 			model.addAttribute("messsage", "You have logged out successfully");
-		return "login2";
+		return "login";
 	}
 
 	@GetMapping(value = "/register/form")
@@ -73,43 +73,46 @@ public class UsersMvcController {
 	}
 
 	@PostMapping(value = "/register/save")
-	public String saveUserRegistration(@ModelAttribute(name = "userRegistration") UserReg userRegistration, BindingResult result,ModelMap map) {
+	public String saveUserRegistration(@ModelAttribute(name = "userRegistration") UserReg userRegistration,
+			BindingResult result, ModelMap map) {
 		if (result.hasErrors()) {
 			return "userRegistrationForm";
 		}
-		
-		if(userRegistration.getLoginUsername() != null && !userRegistration.getLoginUsername().isBlank()) {
+
+		if (userRegistration.getLoginUsername() != null && !userRegistration.getLoginUsername().isBlank()) {
 			UserReg user = userService.findUserProfileByLoginUsername(userRegistration.getLoginUsername());
-			if(user !=null)
+			if (user != null)
 				return "userExists";
 		}
-		
+
 		userService.saveUserRegistration(userRegistration);
+		
 		map.put("resp", "Registration Successful");
 		return "userRegistrationForm";
 	}
 
 	@GetMapping(value = "/view/profile")
 	public String getUserProfile(ModelMap map) {
-		
+
 		UserReg userRegistration = userService.findUserProfileByLoginUsername(securityUtil.getLoginUsername());
 		map.put("userProfile", userRegistration);
-		
+
 		String loginUserName = securityUtil.getLoginUsername();
 		System.out.println(loginUserName);
-		
+
 		if (loginUserName != null && !loginUserName.equals("anonymousUser")) {
 			UserDetails details = userService.loadUserByUsername(loginUserName);
-			if (details != null && details.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+			if (details != null
+					&& details.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
 				return "viewUserProfileAdmin";
 			}
 		}
 		return "viewUserProfile";
 	}
 
-	@GetMapping(value = "/editProfileForm/{loginUsername}")
-	public String updateUserProfileFormPage(@PathVariable String loginUsername, ModelMap map) {
-		UserReg user = userService.findUserProfileByLoginUsername(loginUsername);
+	@GetMapping(value = "/editProfileForm/{userid}")
+	public String updateUserProfileFormPage(@PathVariable Long userid, ModelMap map) {
+		UserReg user = userService.findUserProfileByUserId(userid);
 		map.addAttribute("userReg", user);
 		return "updateUserProfileForm";
 	}
@@ -119,7 +122,7 @@ public class UsersMvcController {
 		if (br.hasErrors()) {
 			return "updateUserProfileForm";
 		}
-		userService.updateUserProfileByLoginUsername(securityUtil.getLoginUsername(), userReg);
+		userService.updateUserProfile(userReg);
 		return "redirect:/view/profile";
 	}
 
@@ -128,95 +131,94 @@ public class UsersMvcController {
 	 * return "profilePicForm2"; }
 	 */
 
-	/*@PostMapping(value = "/image-upload/saveEmployee")
-	public @ResponseBody ResponseEntity<?> saveprofilePic(final @RequestParam("file") MultipartFile file) {
-		try {
-			String fileName = file.getOriginalFilename();
-			String filePath = Paths.get(uploadDirectory, fileName).toString();
-			String fileType = file.getContentType();
-			long size = file.getSize();
-			String fileSize = String.valueOf(size);
+	/*
+	 * @PostMapping(value = "/image-upload/saveEmployee") public @ResponseBody
+	 * ResponseEntity<?> saveprofilePic(final @RequestParam("file") MultipartFile
+	 * file) { try { String fileName = file.getOriginalFilename(); String filePath =
+	 * Paths.get(uploadDirectory, fileName).toString(); String fileType =
+	 * file.getContentType(); long size = file.getSize(); String fileSize =
+	 * String.valueOf(size);
+	 * 
+	 * log.info("FileName: " + file.getOriginalFilename()); log.info("FileType: " +
+	 * fileType); log.info("FileSize: " + fileSize);
+	 * 
+	 * // Save the file locally BufferedOutputStream stream = new
+	 * BufferedOutputStream(new FileOutputStream(new File(filePath)));
+	 * stream.write(file.getBytes()); stream.close();
+	 * userService.updateProfilePicNameForCurrentLoggedInUser(fileName,
+	 * securityUtil.getLoginUsername()); } catch (Exception e) {
+	 * e.printStackTrace(); log.info("Exception: " + e); return new
+	 * ResponseEntity<>(HttpStatus.BAD_REQUEST); } return new
+	 * ResponseEntity<>(HttpStatus.OK); }
+	 */
 
-			log.info("FileName: " + file.getOriginalFilename());
-			log.info("FileType: " + fileType);
-			log.info("FileSize: " + fileSize);
+	/*
+	 * @PostMapping(value = "/savefile") public String saveimage(@RequestParam
+	 * MultipartFile file, @RequestParam(name = "contactId") Long contactId) throws
+	 * Exception {
+	 * 
+	 * String fileName = file.getOriginalFilename(); String filePath =
+	 * Paths.get(uploadDirectory, fileName).toString();
+	 * 
+	 * BufferedOutputStream stream = new BufferedOutputStream(new
+	 * FileOutputStream(new File(filePath))); stream.write(file.getBytes());
+	 * stream.flush(); stream.close();
+	 * userService.updateContctPicNameForCurrentLoggedInUsername(fileName,
+	 * contactId);
+	 * 
+	 * return "redirect:/view/courses"; }
+	 */
 
-			// Save the file locally
-			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
-			stream.write(file.getBytes());
-			stream.close();
-			userService.updateProfilePicNameForCurrentLoggedInUser(fileName, securityUtil.getLoginUsername());
-		} catch (Exception e) {
-			e.printStackTrace();
-			log.info("Exception: " + e);
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		return new ResponseEntity<>(HttpStatus.OK);
-	}*/
-
-	/*@PostMapping(value = "/savefile")
-	public String saveimage(@RequestParam MultipartFile file, @RequestParam(name = "contactId") Long contactId)
-			throws Exception {
-
-		String fileName = file.getOriginalFilename();
-		String filePath = Paths.get(uploadDirectory, fileName).toString();
-
-		BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
-		stream.write(file.getBytes());
-		stream.flush();
-		stream.close();
-		userService.updateContctPicNameForCurrentLoggedInUsername(fileName, contactId);
-
-		return "redirect:/view/courses";
-	}*/
-	
-	
 	@GetMapping(value = "/view/courses")
 	public String allCourses(ModelMap map) {
 		List<Course> courseList = userService.getAllCourses();
-		//System.out.println(courseList);
+		// System.out.println(courseList);
 		map.put("courseList", courseList);
-		
+
 		String loginUserName = securityUtil.getLoginUsername();
 		System.out.println(loginUserName);
 		if (loginUserName != null && !loginUserName.equals("anonymousUser")) {
 			UserDetails details = userService.loadUserByUsername(loginUserName);
-			if (details != null && details.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+			System.out.println(details.getUsername());
+			System.out.println(details.getPassword());
+			System.out.println(details.getAuthorities());
+			if (details != null
+					&& details.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
 				return "viewAllCoursesAdmin";
 			}
 		}
 		return "viewAllCourses";
 
 	}
-	
+
 	@GetMapping(value = "/view/users")
 	public String allUsers(ModelMap map) {
-		
+
 		List<UserReg> usersList = userService.getAllUsers();
 		map.put("usersList", usersList);
-		
-		//String loginUserName = securityUtil.getLoginUsername();
-		//if (loginUserName != null && !loginUserName.equals("anonymousUser")) {
-			//UserDetails details = userService.loadUserByUsername(loginUserName);
-			//if (details != null && details.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-				return "viewAllUsersAdmin";
-			//}
-		//}
-		//return "viewAllUsers";
+
+		// String loginUserName = securityUtil.getLoginUsername();
+		// if (loginUserName != null && !loginUserName.equals("anonymousUser")) {
+		// UserDetails details = userService.loadUserByUsername(loginUserName);
+		// if (details != null && details.getAuthorities().stream().anyMatch(a ->
+		// a.getAuthority().equals("ROLE_ADMIN"))) {
+		return "viewAllUsersAdmin";
+		// }
+		// }
+		// return "viewAllUsers";
 	}
-	
-	
+
 	@GetMapping(value = "/enroll/{topicName}")
 	public String enrollTopicName(@PathVariable(name = "topicName", required = true) String topicName, ModelMap map) {
 		String res = userService.enrollTopicNameForUser(securityUtil.getLoginUsername(), topicName);
 		map.put("enroll", res);
 		return "enrollSuccess";
 	}
-	
-	
+
 	@GetMapping(value = "/view/enrolledcourses")
 	public String myCourses(ModelMap map) {
-		List<Course> courseListForUser = userService.getAllEnrolledCoursesByLoginUsername(securityUtil.getLoginUsername());
+		List<Course> courseListForUser = userService
+				.getAllEnrolledCoursesByLoginUsername(securityUtil.getLoginUsername());
 		map.put("enrolledCourseList", courseListForUser);
 		return "viewAllEnrolledCoursesForUser";
 	}
@@ -224,10 +226,10 @@ public class UsersMvcController {
 	@GetMapping(value = "/admin/search/topic")
 	public String adminSearchTopic(@RequestParam("topic") String topic, ModelMap map) {
 		Optional<List<Course>> courseList = userService.searchAllTopicsByTopicName(topic);
-		if(courseList.isPresent()) {
+		if (courseList.isPresent()) {
 			map.put("courseList", courseList.get());
 			return "viewAllCoursesAdmin";
-		}else {
+		} else {
 			return "viewCoursesAdmin";
 		}
 	}
@@ -235,48 +237,49 @@ public class UsersMvcController {
 	@GetMapping(value = "/user/search/topic")
 	public String searchTopicByToicName(@RequestParam("topicName") String topicName, ModelMap map) {
 		Optional<List<Course>> courseListForUser = userService.searchAllTopicsByTopicName(topicName);
-		if(courseListForUser.isPresent())
+		if (courseListForUser.isPresent())
 			map.put("enrolledCourseList", courseListForUser.get());
 		return "viewAllEnrolledCoursesForUser";
 	}
-	
-	// user enrolled courses page
-		/*@GetMapping(value = "/search/topic")
-		public String searchTopic(@RequestParam("topic") String topic, ModelMap map) {
-			List<Courses> courseList = userService.searchAllTopicsByTopicName(topic);
-			map.put("courseList", courseList);
-			return "viewAllCourses";
-		}*/
 
-		@GetMapping(value = "/course/form")
-		public String getAddCourseFormPage(ModelMap model) {
-			model.addAttribute("course", new Course());
+	// user enrolled courses page
+	/*
+	 * @GetMapping(value = "/search/topic") public String
+	 * searchTopic(@RequestParam("topic") String topic, ModelMap map) {
+	 * List<Courses> courseList = userService.searchAllTopicsByTopicName(topic);
+	 * map.put("courseList", courseList); return "viewAllCourses"; }
+	 */
+
+	@GetMapping(value = "/course/form")
+	public String getAddCourseFormPage(ModelMap model) {
+		model.addAttribute("course", new Course());
+		return "addCourseForm";
+	}
+
+	@PostMapping(value = "/course/save")
+	public String saveCourse(@Valid @ModelAttribute("course") Course course, BindingResult br, ModelMap map) {
+		if (br.hasErrors()) {
 			return "addCourseForm";
 		}
+		String reg = userService.saveCourse(course);
+		map.put("reg", reg);
+		return "courseAddSuccess";
+	}
 
-		@GetMapping(value = "/edit/courseForm/{topicName}")
-		public String updateCourseFormPage(@PathVariable String topicName, ModelMap map) {
-			Course course = userService.getCourseByTopicName(topicName);
-			map.addAttribute("course", course);
+	@GetMapping(value = "/edit/courseForm/{courseid}")
+	public String updateCourseFormPage(@PathVariable Long courseid, ModelMap map) {
+		Course course = userService.getCourseByCourseId(courseid);
+		map.addAttribute("courseUpdate", course);
+		return "updateCourseForm";
+	}
+
+	@PostMapping(value = "/course/update")
+	public String updateCourse(@Valid Course course, BindingResult br) {
+		if (br.hasErrors()) {
 			return "updateCourseForm";
 		}
-
-		@PostMapping(value = "/course/save")
-		public String saveCourse(@Valid @ModelAttribute Course course, BindingResult br, ModelMap map) {
-			if (br.hasErrors()) {
-				return "addCourseForm";
-			}
-			String reg = userService.saveCourse(course);
-			map.put("reg", reg);
-			return "courseAddSuccess";
-		}
-
-		@PostMapping(value = "/course/update")
-		public String updateCourse(@Valid @ModelAttribute Course course, BindingResult br) {
-			if (br.hasErrors()) {
-				return "updateCourseForm";
-			}
-			userService.updateCourse(course);
-			return "redirect:/view/courses";
-		}
+		System.out.println(course);
+		userService.updateCourse(course);
+		return "redirect:/view/courses";
+	}
 }

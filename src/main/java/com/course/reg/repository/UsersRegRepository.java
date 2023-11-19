@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.course.reg.model.UserReg;
 
 @Repository
-public interface UsersRepository extends JpaRepository<UserReg, Long> {
+public interface UsersRegRepository extends JpaRepository<UserReg, Long> {
+	
 	UserReg findByLoginUsername(String loginUsername);
+	
 }

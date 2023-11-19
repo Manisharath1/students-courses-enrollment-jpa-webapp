@@ -129,7 +129,7 @@ section .btn_signup {
 }
 
 .errormsg {
-	color: red;
+	color: orange;
 	font-style: bold;
 }
 /*main or body section endened */
@@ -185,6 +185,8 @@ footer a {
 			</h1>
 			<form:form action="${pageContext.request.contextPath}/course/save" method="POST" modelAttribute="course">
 				<table>
+					
+					
 					<tr>
 						<td>Course Name :</td>
 						<td><form:input path="courseName" /></td>
@@ -200,11 +202,6 @@ footer a {
 						<td><form:input path="refUrlText" /></td>
 						<td><form:errors path="refUrlText" cssClass="errormsg" /></td>
 					</tr>
-					<%-- <tr>
-						<td>Contact Date Of Birth :</td>
-						<td><form:input type="date" path="contactDob" /></td>
-						<td><form:errors path="contactDob" cssClass="errormsg" /></td>
-					</tr> --%>
 					<tr>
 						<td>Ref Url Video :</td>
 						<td><form:input path="refUrlVideo" /></td>

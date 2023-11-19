@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "COURSES_DETAILS")
@@ -12,24 +13,29 @@ public class Course {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer courseid;
+	private Long courseid;
 
+	@NotEmpty(message = "Course name should be minimum 4 chars")
+    //@Size(min=4,message="course name should be minimum 4 chars") 
 	//@Column(name = "courseName")
 	private String courseName;
 
+	@NotEmpty(message = "Topic name should be minimum 4 chars")
 	//@Column(name = "topicName")
 	private String topicName;
 
+	@NotEmpty(message = "Ref url text should be minimum 10 chars")
 	//@Column(name = "refUrlText")
 	private String refUrlText;
 
+	@NotEmpty(message = "Ref url video should be minimum 10 chars")
 	//@Column(name = "refUrlVideo")
 	private String refUrlVideo;
 
 	public Course() {
 	}
 
-	public Course(Integer courseid, String courseName, String topicName, String refUrlText, String refUrlVideo) {
+	public Course(Long courseid, String courseName, String topicName, String refUrlText, String refUrlVideo) {
 		super();
 		this.courseid = courseid;
 		this.courseName = courseName;
@@ -38,11 +44,11 @@ public class Course {
 		this.refUrlVideo = refUrlVideo;
 	}
 
-	public Integer getCourseid() {
+	public Long getCourseid() {
 		return courseid;
 	}
 
-	public void setCoursiId(Integer id) {
+	public void setCourseid(Long id) {
 		this.courseid = id;
 	}
 

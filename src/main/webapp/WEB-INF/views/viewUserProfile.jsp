@@ -208,7 +208,7 @@ footer a {
 						<td align="center"><fmt:formatDate value="${userProfile.dob}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
 						<%-- <td align="center"><fmt:formatDate value="${userProfile.createdDate}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
 						<td align="center"><fmt:formatDate value="${userProfile.lastUpdatedDate}" pattern="dd/MM/yyyy"></fmt:formatDate></td> --%>
-						<td align="center"><a href="${pageContext.request.contextPath}/editProfileForm/${userProfile.loginUsername}">Edit</a>
+						<td align="center"><a href="${pageContext.request.contextPath}/editProfileForm/${userProfile.userid}">Edit</a>
 					</tr>
 			</tbody>
 		</table>

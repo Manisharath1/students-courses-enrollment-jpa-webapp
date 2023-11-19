@@ -180,8 +180,13 @@ footer a {
 	<form:form method="POST" action="${pageContext.request.contextPath}/profile/update" modelAttribute="userReg">
 		<table>
 			<tr>
-				<td></td>
-				<td><form:hidden path="loginUsername" /></td>
+				<td>User Id</td>
+				<td><form:input path="userid" readonly="true"/></td>
+			</tr>
+			<tr>
+				<td>Login Username:</td>
+				<td><form:input path="loginUsername" /></td>
+				<td><form:errors path = "loginUsername" cssClass = "errormsg" /></td>
 			</tr>
 			<tr>
 				<td>First Name :</td>

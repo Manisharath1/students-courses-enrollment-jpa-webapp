@@ -209,7 +209,7 @@ footer a {
 						<td align="center">${course.refUrlText}</td>
 						<td align="center">${course.refUrlVideo}</td>
 						<td align="center">
-						<a href="${pageContext.request.contextPath}/edit/courseForm/${course.topicName}" type="button" >Edit</a>
+						<a href="${pageContext.request.contextPath}/edit/courseForm/${course.courseid}" type="button" >Edit</a>
 						</td>
 					</tr>
 				</c:forEach>

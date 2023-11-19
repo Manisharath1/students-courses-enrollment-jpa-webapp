@@ -1,8 +1,11 @@
 package com.course.reg.model;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,9 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Entity
 @Table(name = "users_details")
-public class UserReg implements Serializable {
+public class UserReg {
 
 	private static final long serialVersionUID = -300263021830590898L;
 
@@ -20,49 +27,53 @@ public class UserReg implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userid;
 
-	//@Column(name = "firstName")
-	//@NotNull(message = "Firstname should not be empty")
-	//@Size(min = 5, max = 50)
+	@Column(name = "first_name")
+	// @NotNull(message = "Firstname should not be empty")
+	// @Size(min = 5, max = 50)
 	private String firstName;
 
-	//@Column(name = "lastName")
-	//@NotBlank(message = "Lastname should not be empty")
-	//@Size(min = 5, max = 50)
+	@Column(name = "last_name")
+	// @NotBlank(message = "Lastname should not be empty")
+	// @Size(min = 5, max = 50)
 	private String lastName;
 
-	//@Column(name = "emailId")
-	//@NotBlank(message = "Email should not be empty")
-	//@Email(message = "Please enter a valid e-mail address")
+	@Column(name = "email_id")
+	// @NotBlank(message = "Email should not be empty")
+	// @Email(message = "Please enter a valid e-mail address")
 	private String emailId;
 
-	//@Column(name = "mobileNo")
-	//@NotBlank(message = "Mobile No should not be empty")
-	//@Size(min = 10, max = 10, message = "Please provide your 10 digit mobile no")
+	@Column(name = "mobile_no")
+	// @NotBlank(message = "Mobile No should not be empty")
+	// @Size(min = 10, max = 10, message = "Please provide your 10 digit mobile no")
 	private String mobileNo;
 
-	//@Column(name = "dob")
-	//@NotNull(message = "Date Of Birth should not be empty")
-	//@Past(message = "Birth date must be the past date")
-	//@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Column(name = "dob")
+	// @NotNull(message = "Date Of Birth should not be empty")
+	// @Past(message = "Birth date must be the past date")
+	// @DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dob;
 
-	//@Column(name = "createdDate")
-	private Date createdDate;
+	// @Column(name = "createdDate")
+	// private Date createdDate;
 
-	//@Column(name = "lastUpdatedDate")
-	private Date lastUpdatedDate;
+	// @Column(name = "lastUpdatedDate")
+	// private Date lastUpdatedDate;
 
-	//@Column(name = "login_username")
-	//@NotBlank(message = "Login username should not be empty")
+	//@Transient
+	@Column(name = "login_username")
+	// @NotBlank(message = "Login username should not be empty")
 	private String loginUsername;
 
+	@Transient
 	//@Column(name = "login_password")
-	//@NotEmpty(message = "Login Password should not be empty")
+	// @NotEmpty(message = "Login Password should not be empty")
 	private String loginPassword;
 
-	//@Column(name = "role")
-	private String role;
+	@Transient
+	//@Column(name = "user_role")
+	private String userRole;
 
+	@Transient
 	//@Column(name = "enabled")
 	private Integer enabled;
 
@@ -72,21 +83,22 @@ public class UserReg implements Serializable {
 	public UserReg() {
 	}
 
-	public UserReg(Long userid,String firstName, String lastName, String emailId, String mobileNo, Date dob, Date createdDate,
-			Date lastUpdatedDate, String loginUsername, String loginPassword, String role,int enabled, String adminCode) {
+	public UserReg(Long userid, String firstName, String lastName, String emailId, String mobileNo, Date dob,
+			Date createdDate, Date lastUpdatedDate, String loginUsername, String loginPassword, String role,
+			int enabled, String adminCode) {
 		super();
-		this.userid=userid;
+		this.userid = userid;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.emailId = emailId;
 		this.mobileNo = mobileNo;
 		this.dob = dob;
-		this.createdDate = createdDate;
-		this.lastUpdatedDate = lastUpdatedDate;
+		// this.createdDate = createdDate;
+		// this.lastUpdatedDate = lastUpdatedDate;
 		this.loginUsername = loginUsername;
 		this.loginPassword = loginPassword;
-		this.role=role;
-		this.enabled=enabled;
+		this.userRole = role;
+		this.enabled = enabled;
 		this.adminCode = adminCode;
 	}
 
@@ -98,8 +110,8 @@ public class UserReg implements Serializable {
 		this.userid = userId;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setUserRole(String role) {
+		this.userRole = role;
 	}
 
 	public Integer getEnabled() {
@@ -150,21 +162,17 @@ public class UserReg implements Serializable {
 		this.dob = dob;
 	}
 
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public Date getLastUpdatedDate() {
-		return lastUpdatedDate;
-	}
-
-	public void setLastUpdatedDate(Date lastUpdatedDate) {
-		this.lastUpdatedDate = lastUpdatedDate;
-	}
+	/*
+	 * public Date getCreatedDate() { return createdDate; }
+	 * 
+	 * public void setCreatedDate(Date createdDate) { this.createdDate =
+	 * createdDate; }
+	 * 
+	 * public Date getLastUpdatedDate() { return lastUpdatedDate; }
+	 * 
+	 * public void setLastUpdatedDate(Date lastUpdatedDate) { this.lastUpdatedDate =
+	 * lastUpdatedDate; }
+	 */
 
 	public String getLoginUsername() {
 		return loginUsername;
@@ -190,15 +198,17 @@ public class UserReg implements Serializable {
 		this.adminCode = adminCode;
 	}
 
-	public String getRole() {
-		return role;
+	public String getUserRole() {
+		return userRole;
 	}
 
 	@Override
 	public String toString() {
-		return "User [" + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId + ", mobileNo="
-				+ mobileNo + ", dob=" + dob + ", createdDate=" + createdDate + ", lastUpdatedDate=" + lastUpdatedDate
-				+ ", loginUsername=" + loginUsername + "]";
+		return "UserReg [userid=" + userid + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId="
+				+ emailId + ", mobileNo=" + mobileNo + ", dob=" + dob + ", loginUsername=" + loginUsername
+				+ ", loginPassword=" + loginPassword + ", userRole=" + userRole + ", enabled=" + enabled
+				+ ", adminCode=" + adminCode + "]";
 	}
+
 
 }
