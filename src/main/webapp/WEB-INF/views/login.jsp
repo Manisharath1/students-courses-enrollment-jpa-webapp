@@ -19,13 +19,13 @@
                         <form method="post" role="form" action="/login" class="form-horizontal">
                             <div class="mb-3">
                                 <label for="username" class="control-label">Username:</label>
-                                <input type="text" id="username" name="username" class="form-control"
+                                <input type="text" id="username" name="username" required class="form-control"
                                     placeholder="Enter login username" />
                             </div>
 
                             <div class="mb-3">
                                 <label for="password" class="control-label">Password:</label>
-                                <input type="password" id="password" name="password" class="form-control"
+                                <input type="password" id="password" name="password" required class="form-control"
                                     placeholder="Enter login password" />
                             </div>
                             <div class="mb-3">

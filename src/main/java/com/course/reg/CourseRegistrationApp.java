@@ -2,7 +2,6 @@ package com.course.reg;
 
 import java.io.File;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -19,16 +18,9 @@ import com.course.reg.controller.UsersMvcController;
 @EntityScan(basePackages={"com.course.reg.model"})@EnableJpaRepositories(basePackages={"com.course.reg.repository"})
 
 @SpringBootApplication
-public class CourseRegistrationApp implements CommandLineRunner {
+public class CourseRegistrationApp {
 
-	// @Autowired
-	// private UsersRepository usersRepository;
-
-	// @Autowired
-	// private CourseRepository coursesRepository;
-
-	// @Autowired
-	// private UserCourseRegRepository userCourseRegRepository;
+	
 
 	public static void main(String[] args) {
 		new File(UsersMvcController.uploadDirectory.toString()).mkdir();
@@ -51,34 +43,5 @@ public class CourseRegistrationApp implements CommandLineRunner {
 	RestTemplate restTemplate() {
 		final RestTemplate restTemplate = new RestTemplate();
 		return restTemplate;
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
-
-		// users
-		/*
-		 * UserReg user1 = new UserReg(1L,"punyasmruti", "nayak", "punya@gmail.com",
-		 * "9962428121", null, null, null, "punya",
-		 * "$2a$10$g5fAs.BoSvFLeTwdRst/GuwWFI7Sr12LX4uBr0s8d2pBgzyMUq68e", "ROLE_USER",
-		 * 1, null); usersRepository.save(user1);
-		 * 
-		 * // admin user UserReg user2 = new UserReg(2L,"aswini", "kumar",
-		 * "aswini@gmail.com", "9962428121", null, null, null, "aswini",
-		 * "$2a$10$g5fAs.BoSvFLeTwdRst/GuwWFI7Sr12LX4uBr0s8d2pBgzyMUq68e", "ROLE_ADMIN",
-		 * 1, null); usersRepository.save(user2);
-		 * 
-		 * // courses Course course1 = new Course(1, "Java", "Core Java",
-		 * "https://www.google.com", "https://www.youtube.com");
-		 * coursesRepository.save(course1);
-		 * 
-		 * Course course2 = new Course(2, "Java", "Advanced Java",
-		 * "https://www.google.com", "https://www.youtube.com");
-		 * coursesRepository.save(course2);
-		 * 
-		 * UserCourseReg ucr1 = new UserCourseReg("punya", "Core Java");
-		 * userCourseRegRepository.save(ucr1);
-		 */
-
 	}
 }

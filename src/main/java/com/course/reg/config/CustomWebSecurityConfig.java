@@ -17,9 +17,6 @@ public class CustomWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
-	//@Autowired
-	//private UserDetailsServiceImpl userDetailsServiceImpl;
-	
 	@Autowired
 	private UserService userService;
 
@@ -27,19 +24,7 @@ public class CustomWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder authManager) throws Exception {
 		
-		//authManager
-		//.inMemoryAuthentication()
-		//.withUser("punya").password(passwordEncoder.encode("punya")).roles("USER");
-		/*.and()
-		.withUser("sai").password(passwordEncoder.encode("sai")).roles("USER")
-		.and()
-		.withUser("aswini").password(passwordEncoder.encode("aswini")).roles("USER")
-		.and()
-		.withUser("admin").password(passwordEncoder.encode("admin")).roles("ADMIN","MANAGER");*/
-		
-		//OR
 		authManager.userDetailsService(userService).passwordEncoder(passwordEncoder);
-		//https://www.youtube.com/watch?v=ijcce18bzng
 	}
 
 	@Override
@@ -54,13 +39,10 @@ public class CustomWebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/view/users").hasRole("ADMIN")
 		.anyRequest().fullyAuthenticated()
 		.and()
-		//.httpBasic();
 		.formLogin()
 		.loginPage("/login")
 		.loginProcessingUrl("/login")
 		.defaultSuccessUrl("/view/courses")
-		//.defaultSuccessUrl("/home")
-		//.defaultSuccessUrl("/api/rest/consumer/contacts")
 		.failureUrl("/login?error").permitAll()
 		.and()
 		.logout().permitAll()

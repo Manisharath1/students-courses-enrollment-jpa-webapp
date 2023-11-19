@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import com.course.reg.model.Course;
 import com.course.reg.model.UserCourseEnroll;
 import com.course.reg.model.UserReg;
-import com.course.reg.model.UsersLogin;
+import com.course.reg.model.UserLogin;
 import com.course.reg.repository.CourseRepository;
 import com.course.reg.repository.UserCourseEnrollRepository;
 import com.course.reg.repository.UsersLoginRepository;
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private CourseRepository coursesRepository;
-	
+
 	@Autowired
 	private UsersLoginRepository usersLoginRepository;
 
@@ -44,45 +44,34 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDetails loadUserByUsername(String loginUsername) throws UsernameNotFoundException {
 
-		UsersLogin userLogin = usersLoginRepository.findByLoginUserName(loginUsername);
-		System.out.println(" userLogin =====>" + userLogin);
-
-		/*
-		 * GrantedAuthority authority = null;
-		 * 
-		 * UserDetails userDetails = null; User user = null;
-		 * 
-		 * if (userReg != null) { authority = new
-		 * SimpleGrantedAuthority(userReg.getRole());
-		 * System.out.println("authority="+authority); user = new
-		 * User(userReg.getLoginUsername(), user.getPassword(),
-		 * Arrays.asList(authority)); userDetails = (UserDetails) user; return
-		 * userDetails; }
-		 */
-
+		UserLogin userLogin = usersLoginRepository.findByLoginUserName(loginUsername);
 		Set<GrantedAuthority> grantedauthorities = new HashSet<>();
 		grantedauthorities.add(new SimpleGrantedAuthority(userLogin.getUserRole()));
-		return new org.springframework.security.core.userdetails.User(userLogin.getLoginUserName(), userLogin.getLoginPassword(),grantedauthorities);
+		return new org.springframework.security.core.userdetails.User(userLogin.getLoginUserName(),
+				userLogin.getLoginPassword(), grantedauthorities);
 
 	}
 
 	@Override
 	public void saveUserRegistration(UserReg user) {
-		user.setLoginPassword(passwordEncoder.encode(user.getLoginPassword()));
+		
 
 		if (user != null && user.getAdminCode() != null && user.getAdminCode().equals("121")) {
+			user.setLoginPassword(passwordEncoder.encode(user.getLoginPassword()));
 			user.setUserRole("ROLE_ADMIN");
 			user.setEnabled(1);
 		} else {
+			user.setLoginPassword(passwordEncoder.encode(user.getLoginPassword()));
 			user.setUserRole("ROLE_USER");
 			user.setEnabled(1);
 		}
 
 		usersRegRepository.save(user);
-		
-		UsersLogin login = new UsersLogin(user.getLoginUsername(),user.getLoginPassword(),user.getUserRole(),user.getEnabled());
+
+		UserLogin login = new UserLogin(user.getLoginUsername(), user.getLoginPassword(), user.getUserRole(),
+				user.getEnabled());
 		usersLoginRepository.save(login);
-		
+
 	}
 
 	@Override
@@ -99,31 +88,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateUserProfile(UserReg userProfile) {
-
-		/*
-		 * UserReg user = usersRepository.findByLoginUsername(loginUsername);
-		 * user.setFirstName(userProfile.getFirstName());
-		 * user.setLastName(userProfile.getLastName());
-		 * user.setEmailId(userProfile.getEmailId());
-		 * user.setMobileNo(userProfile.getMobileNo());
-		 * user.setDob(userProfile.getDob());
-		 */
 		usersRegRepository.save(userProfile);
 	}
-
-	/*
-	 * @Override public void updateProfilePicNameForCurrentLoggedInUser(String
-	 * fileName, String loginUsername) {
-	 * userDao.updateProfilePicNameForCurrentLoggedInUser(fileName, loginUsername);
-	 * }
-	 */
-
-	/*
-	 * @Override public void updateContctPicNameForCurrentLoggedInUsername(String
-	 * fileName, Long contactId) {
-	 * userDao.updateContactPicNameByContactIdForCurrentLoggedInUser(fileName,
-	 * contactId); }
-	 */
 
 	@Override
 	public List<Course> getAllCourses() {
@@ -142,11 +108,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String enrollTopicNameForUser(String loginusername, String topicName) {
 		UserCourseEnroll obj = new UserCourseEnroll(loginusername, topicName);
-		UserCourseEnroll obj2 = userCourseEnrollRepository.findByLoginUsernameAndTopicName(loginusername,topicName);
-		if(obj2 == null) {
-		userCourseEnrollRepository.save(obj);
-		return topicName + " enrolled successfully";
-		}else {
+		UserCourseEnroll obj2 = userCourseEnrollRepository.findByLoginUsernameAndTopicName(loginusername, topicName);
+		if (obj2 == null) {
+			userCourseEnrollRepository.save(obj);
+			return topicName + " enrolled successfully";
+		} else {
 			return topicName + " has already enrolled";
 		}
 	}

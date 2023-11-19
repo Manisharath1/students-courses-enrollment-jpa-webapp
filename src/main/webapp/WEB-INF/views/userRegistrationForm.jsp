@@ -170,7 +170,7 @@ footer a {
 	<main>
 	<section>
 	<h1><u>User Registration Form</u></h1>
-	<form:form action="${pageContext.request.contextPath}/register/save" method="post" modelAttribute="userRegistration">
+	<form:form action="${pageContext.request.contextPath}/register/save" method="post" modelAttribute="userRegForm">
 		<table>
 			<tr>
 				<td align="right">First Name:</td>

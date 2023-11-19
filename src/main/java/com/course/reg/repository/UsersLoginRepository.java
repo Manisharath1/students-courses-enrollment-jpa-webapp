@@ -3,11 +3,11 @@ package com.course.reg.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.course.reg.model.UsersLogin;
+import com.course.reg.model.UserLogin;
 
 @Repository
-public interface UsersLoginRepository extends JpaRepository<UsersLogin, Long> {
+public interface UsersLoginRepository extends JpaRepository<UserLogin, Long> {
 	
-	UsersLogin findByLoginUserName(String loginUsername);
+	UserLogin findByLoginUserName(String loginUsername);
 
 }

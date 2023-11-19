@@ -184,11 +184,6 @@ footer a {
 				<td><form:input path="userid" readonly="true"/></td>
 			</tr>
 			<tr>
-				<td>Login Username:</td>
-				<td><form:input path="loginUsername" /></td>
-				<td><form:errors path = "loginUsername" cssClass = "errormsg" /></td>
-			</tr>
-			<tr>
 				<td>First Name :</td>
 				<td><form:input path="firstName" /></td>
 				<td><form:errors path = "firstName" cssClass = "errormsg" /></td>
@@ -212,6 +207,11 @@ footer a {
 				<td>Date Of Birth :</td>
 				<td width="40"><form:input type="date" path="dob"/></td>
 				 <td><form:errors path = "dob" cssClass = "errormsg" /></td>
+			</tr>
+			<tr>
+				<td>Login Username:</td>
+				<td><form:input path="loginUsername" /></td>
+				<td><form:errors path = "loginUsername" cssClass = "errormsg" /></td>
 			</tr>
 			<tr>
 				<td></td>

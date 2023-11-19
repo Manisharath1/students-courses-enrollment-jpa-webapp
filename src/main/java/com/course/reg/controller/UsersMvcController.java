@@ -68,26 +68,26 @@ public class UsersMvcController {
 
 	@GetMapping(value = "/register/form")
 	public String userRegistrationForm(Model model) {
-		model.addAttribute("userRegistration", new UserReg());
+		model.addAttribute("userRegForm", new UserReg());
 		return "userRegistrationForm";
 	}
 
 	@PostMapping(value = "/register/save")
-	public String saveUserRegistration(@ModelAttribute(name = "userRegistration") UserReg userRegistration,
-			BindingResult result, ModelMap map) {
+	public String saveUserRegistration(@Valid @ModelAttribute("userRegForm") UserReg userReg,BindingResult result, ModelMap map) {
+		
 		if (result.hasErrors()) {
 			return "userRegistrationForm";
 		}
 
-		if (userRegistration.getLoginUsername() != null && !userRegistration.getLoginUsername().isBlank()) {
-			UserReg user = userService.findUserProfileByLoginUsername(userRegistration.getLoginUsername());
+		if (userReg.getLoginUsername() != null && !userReg.getLoginUsername().isBlank()) {
+			UserReg user = userService.findUserProfileByLoginUsername(userReg.getLoginUsername());
 			if (user != null)
 				return "userExists";
 		}
 
-		userService.saveUserRegistration(userRegistration);
-		
-		map.put("resp", "Registration Successful");
+		userService.saveUserRegistration(userReg);
+
+		map.put("resp", "Registration was Successful");
 		return "userRegistrationForm";
 	}
 
@@ -126,49 +126,6 @@ public class UsersMvcController {
 		return "redirect:/view/profile";
 	}
 
-	/*
-	 * @GetMapping(value = "/setProfilePic") public String getProfilePicForm() {
-	 * return "profilePicForm2"; }
-	 */
-
-	/*
-	 * @PostMapping(value = "/image-upload/saveEmployee") public @ResponseBody
-	 * ResponseEntity<?> saveprofilePic(final @RequestParam("file") MultipartFile
-	 * file) { try { String fileName = file.getOriginalFilename(); String filePath =
-	 * Paths.get(uploadDirectory, fileName).toString(); String fileType =
-	 * file.getContentType(); long size = file.getSize(); String fileSize =
-	 * String.valueOf(size);
-	 * 
-	 * log.info("FileName: " + file.getOriginalFilename()); log.info("FileType: " +
-	 * fileType); log.info("FileSize: " + fileSize);
-	 * 
-	 * // Save the file locally BufferedOutputStream stream = new
-	 * BufferedOutputStream(new FileOutputStream(new File(filePath)));
-	 * stream.write(file.getBytes()); stream.close();
-	 * userService.updateProfilePicNameForCurrentLoggedInUser(fileName,
-	 * securityUtil.getLoginUsername()); } catch (Exception e) {
-	 * e.printStackTrace(); log.info("Exception: " + e); return new
-	 * ResponseEntity<>(HttpStatus.BAD_REQUEST); } return new
-	 * ResponseEntity<>(HttpStatus.OK); }
-	 */
-
-	/*
-	 * @PostMapping(value = "/savefile") public String saveimage(@RequestParam
-	 * MultipartFile file, @RequestParam(name = "contactId") Long contactId) throws
-	 * Exception {
-	 * 
-	 * String fileName = file.getOriginalFilename(); String filePath =
-	 * Paths.get(uploadDirectory, fileName).toString();
-	 * 
-	 * BufferedOutputStream stream = new BufferedOutputStream(new
-	 * FileOutputStream(new File(filePath))); stream.write(file.getBytes());
-	 * stream.flush(); stream.close();
-	 * userService.updateContctPicNameForCurrentLoggedInUsername(fileName,
-	 * contactId);
-	 * 
-	 * return "redirect:/view/courses"; }
-	 */
-
 	@GetMapping(value = "/view/courses")
 	public String allCourses(ModelMap map) {
 		List<Course> courseList = userService.getAllCourses();
@@ -196,16 +153,7 @@ public class UsersMvcController {
 
 		List<UserReg> usersList = userService.getAllUsers();
 		map.put("usersList", usersList);
-
-		// String loginUserName = securityUtil.getLoginUsername();
-		// if (loginUserName != null && !loginUserName.equals("anonymousUser")) {
-		// UserDetails details = userService.loadUserByUsername(loginUserName);
-		// if (details != null && details.getAuthorities().stream().anyMatch(a ->
-		// a.getAuthority().equals("ROLE_ADMIN"))) {
 		return "viewAllUsersAdmin";
-		// }
-		// }
-		// return "viewAllUsers";
 	}
 
 	@GetMapping(value = "/enroll/{topicName}")
@@ -242,14 +190,6 @@ public class UsersMvcController {
 		return "viewAllEnrolledCoursesForUser";
 	}
 
-	// user enrolled courses page
-	/*
-	 * @GetMapping(value = "/search/topic") public String
-	 * searchTopic(@RequestParam("topic") String topic, ModelMap map) {
-	 * List<Courses> courseList = userService.searchAllTopicsByTopicName(topic);
-	 * map.put("courseList", courseList); return "viewAllCourses"; }
-	 */
-
 	@GetMapping(value = "/course/form")
 	public String getAddCourseFormPage(ModelMap model) {
 		model.addAttribute("course", new Course());
@@ -274,7 +214,7 @@ public class UsersMvcController {
 	}
 
 	@PostMapping(value = "/course/update")
-	public String updateCourse(@Valid Course course, BindingResult br) {
+	public String updateCourse(@Valid @ModelAttribute(name="courseUpdate") Course course, BindingResult br) {
 		if (br.hasErrors()) {
 			return "updateCourseForm";
 		}

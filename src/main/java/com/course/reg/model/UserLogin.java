@@ -17,7 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "users_login")
-public class UsersLogin implements UserDetails {
+public class UserLogin implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,10 +33,10 @@ public class UsersLogin implements UserDetails {
 	@Column(name = "enabled")
 	private Integer enabled;
 
-	public UsersLogin() {
+	public UserLogin() {
 	}
 
-	public UsersLogin(String loginUserName, String loginPassword, String userRole, Integer enabled) {
+	public UserLogin(String loginUserName, String loginPassword, String userRole, Integer enabled) {
 		super();
 		this.loginUserName = loginUserName;
 		this.loginPassword = loginPassword;

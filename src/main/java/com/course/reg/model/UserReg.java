@@ -1,9 +1,6 @@
 package com.course.reg.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,10 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users_details")
@@ -27,21 +22,27 @@ public class UserReg {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userid;
 
+	@NotEmpty(message = "First name should not be empty")
 	@Column(name = "first_name")
 	// @NotNull(message = "Firstname should not be empty")
-	// @Size(min = 5, max = 50)
+	//@Size(min = 5, max = 20)
 	private String firstName;
 
+	@NotEmpty(message = "Last name should not be empty")
 	@Column(name = "last_name")
 	// @NotBlank(message = "Lastname should not be empty")
-	// @Size(min = 5, max = 50)
+	//@Size(min = 5, max = 20)
 	private String lastName;
 
+	@NotEmpty(message = "Email should be empty")
+	//@Size(min = 10, max = 20)
 	@Column(name = "email_id")
 	// @NotBlank(message = "Email should not be empty")
-	// @Email(message = "Please enter a valid e-mail address")
+	//@Email(message = "Please enter a valid e-mail address")
 	private String emailId;
 
+	@NotEmpty(message = "Mobile No should not be empty")
+	//@Size(min=10,max = 10)
 	@Column(name = "mobile_no")
 	// @NotBlank(message = "Mobile No should not be empty")
 	// @Size(min = 10, max = 10, message = "Please provide your 10 digit mobile no")
@@ -59,14 +60,17 @@ public class UserReg {
 	// @Column(name = "lastUpdatedDate")
 	// private Date lastUpdatedDate;
 
+	@NotEmpty(message = "Login Username should not be empty")
+	//@Size(min=5,max = 10)
 	//@Transient
 	@Column(name = "login_username")
 	// @NotBlank(message = "Login username should not be empty")
 	private String loginUsername;
 
+	//@Size(min=5,max = 10)
 	@Transient
 	//@Column(name = "login_password")
-	// @NotEmpty(message = "Login Password should not be empty")
+	@NotEmpty(message = "Login Password should not be empty")
 	private String loginPassword;
 
 	@Transient
