@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.course.reg.model.Course;
+import com.course.reg.model.UserCourseEnroll;
 import com.course.reg.model.UserReg;
 
 
@@ -19,6 +20,7 @@ public interface UserService extends UserDetailsService{
 	public List<Course> getAllCourses();
 	public List<UserReg> getAllUsers();
 	public Optional<List<Course>> searchAllTopicsByTopicName(String topicName);
+	public List<Course> searchAllEnrolledTopicsByTopicName(String loginusername,String topicName);
 	public String saveCourse(Course course);
 	public Course getCourseByCourseId(Long courseId);
 	public void updateCourse(Course course);

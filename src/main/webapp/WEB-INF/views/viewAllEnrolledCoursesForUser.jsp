@@ -189,7 +189,7 @@ footer a {
 		
 		<br>
 		
-		<form action="<c:url value="/user/search/topic"/>">
+		<form action="<c:url value="/user/search/enrolled/topic"/>">
 			<h3 color="green">Search By Topic Name:</h3><input type="text" name="topicName" placeholder="Enter topic name name"/>
 			<button>Search</button>
 		</form >

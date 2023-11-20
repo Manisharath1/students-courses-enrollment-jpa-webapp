@@ -116,6 +116,16 @@ public class UserServiceImpl implements UserService {
 			return topicName + " has already enrolled";
 		}
 	}
+	
+	@Override
+	public List<Course> searchAllEnrolledTopicsByTopicName(String loginusername,String topicName) {
+		Optional<List<UserCourseEnroll>> obj2 = userCourseEnrollRepository.findByLoginUsernameAndTopicNameIgnoreCaseContaining(loginusername, topicName);
+		List<String> topicNames = null;
+		if(obj2.isPresent()) {
+			topicNames = obj2.get().stream().map(UserCourseEnroll::getTopicName).collect(Collectors.toList());
+		}
+		return coursesRepository.findByTopicNameIn(topicNames);
+	}
 
 	@Override
 	public Optional<List<Course>> searchAllTopicsByTopicName(String topicName) {
@@ -142,4 +152,6 @@ public class UserServiceImpl implements UserService {
 	public List<UserReg> getAllUsers() {
 		return usersRegRepository.findAll();
 	}
+
+	
 }

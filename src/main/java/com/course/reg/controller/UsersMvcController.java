@@ -182,12 +182,23 @@ public class UsersMvcController {
 			return "viewCoursesAdmin";
 		}
 	}
-
+	
 	@GetMapping(value = "/user/search/topic")
 	public String searchTopicByToicName(@RequestParam("topicName") String topicName, ModelMap map) {
-		Optional<List<Course>> courseListForUser = userService.searchAllTopicsByTopicName(topicName);
-		if (courseListForUser.isPresent())
-			map.put("enrolledCourseList", courseListForUser.get());
+		List<Course> courseListForUser = userService.searchAllTopicsByTopicName(topicName).get();
+		if (courseListForUser != null)
+			map.put("enrolledCourseList", courseListForUser);
+		return "viewAllEnrolledCoursesForUser";
+	}
+
+
+	@GetMapping(value = "/user/search/enrolled/topic")
+	public String searchEnrolledTopicByToicName(@RequestParam("topicName") String topicName, ModelMap map) {
+		
+		//Optional<List<UserCourseEnroll>> courseListForUser = userService.searchAllEnrolledTopicsByTopicName(securityUtil.getLoginUsername(),topicName);
+		List<Course> courseListForUser = userService.searchAllEnrolledTopicsByTopicName(securityUtil.getLoginUsername(),topicName);
+		if (courseListForUser != null)
+			map.put("enrolledCourseList", courseListForUser);
 		return "viewAllEnrolledCoursesForUser";
 	}
 
