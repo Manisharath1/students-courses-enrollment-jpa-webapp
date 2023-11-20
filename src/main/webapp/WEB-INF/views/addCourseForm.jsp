@@ -17,10 +17,8 @@
     ####################################################################################################*/
 header {
 	margin: auto;
-	/* border: 2px solid red; */
 	background-color: #5d2e2e;
 	height: 115px;
-	/* border-radius: 10px; */
 }
 
 img {
@@ -83,10 +81,7 @@ main {
 	color: black;
 }
 
-/* span {
-	background-color: blue;
-}
- */
+
 section h3 {
 	font-size: 35px;
 	font-weight: 200;
@@ -112,7 +107,6 @@ section a {
 	padding: 12px 30px;
 	border-radius: 4px;
 	outline: none;
-	/*text-transform: uppercase;*/
 	font-size: 13px;
 	font-weight: 500;
 	text-decoration: none;
@@ -132,7 +126,6 @@ section .btn_signup {
 	color: orange;
 	font-style: bold;
 }
-/*main or body section endened */
 
 /*####################################################################################################
 	footer section
@@ -140,9 +133,6 @@ section .btn_signup {
 footer {
 	width: 100%;
 	height: 5vh;
-	/*background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), url('../images/showcase.jpg');*/
-	/*background-repeat: no-repeat;*/
-	/*background-size: cover;*/
 	background-color: #5d2e2e;
 	text-align: center;
 	padding-top: 5px;
@@ -159,7 +149,6 @@ footer a {
 </head>
 <body>
 	<header>
-		<!-- <img src="static/images/punya.PNG" alt="photo"> -->
 		<h1>Welcome To Course Enrollment App</h1>
 		<nav class="navbar">
 			<ul>

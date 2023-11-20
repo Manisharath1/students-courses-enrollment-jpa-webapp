@@ -4,7 +4,6 @@
 <head>
 <title>My Profile</title>
 <style type="text/css">
-
 * {
 	margin: 0px;
 	padding: 0px;
@@ -15,10 +14,8 @@
     ####################################################################################################*/
 header {
 	margin: auto;
-	/* border: 2px solid red; */
 	background-color: #5d2e2e;
 	height: 115px;
-	/* border-radius: 10px; */
 }
 
 img {
@@ -38,11 +35,8 @@ h1 {
 	text-decoration: underline;
 }
 
-
 .navbar {
 	background-color: orange;
-	/* border-radius: 10px; */
-	/* border: 2px solid red; */
 }
 
 .navbar ul {
@@ -72,10 +66,11 @@ main or body content
 main {
 	width: 100%;
 	height: 65.3vh;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),url('/images/2.jpg');
+	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
+		url('/images/2.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-color:lightblue;
+	background-color: lightblue;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -158,66 +153,67 @@ footer a {
 </style>
 </head>
 <body>
-<!-- ######################################## Header  content  ################################## -->
+	<!-- ######################################## Header  content  ################################## -->
 	<header>
 		<!-- <img src="static/images/punya.PNG" alt="photo"> -->
 		<h1 color="cyan">Welcome To Course Registration APP</h1>
 		<nav class="navbar">
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/view/courses">All Courses</a></li>
+				<li><a href="${pageContext.request.contextPath}/view/courses">All
+						Courses</a></li>
 				<%-- <li><a href="${pageContext.request.contextPath}/view/enrolledcourses">My Enrolled Courses</a></li> --%>
 			</ul>
 		</nav>
 	</header>
 	<br>
 	<br>
-	
- <h2 align="center">Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+
+	<h2 align="center">
+		Welcome ${pageContext.request.userPrincipal.name} | <a
+			onclick="document.forms['logoutForm'].submit()">Logout</a>
+	</h2>
 	<!-- <a class="button" href="/contacts">AllContacts</a> / <a class="button" href="/contactsForm">Add New Contact</a> -->
-	 <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
-    </c:if>
-    
-    <main>
-    <section>
-    <h1>User Profile</h1>
-	<div>
-		<table border="1">
-			<thead>
-				<tr>
-					<!-- <th>ID</th> -->
-					<!-- <th>My Profile Picture</th> -->
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Email ID</th>
-					<th>Mobile No</th>
-					<!-- <th>Date Of Birth</th> -->
-					<!-- <th>Created Date</th>
-					<th>Last Modified Date</th> -->
-					<th>Edit/Delete</th>
-				</tr>
-			</thead>
-			<tbody>
-					<tr>
-						<%-- <td>
+	<c:if test="${pageContext.request.userPrincipal.name != null}">
+		<form id="logoutForm" method="POST" action="${contextPath}/logout">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+	</c:if>
+
+	<main>
+		<section>
+			<h1>User Profile</h1>
+			<div>
+				<table border="1">
+					<thead>
+						<tr>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Email ID</th>
+							<th>Mobile No</th>
+							<th>Edit/Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<%-- <td>
 						<img src="/uploads/${userProfile.profilePicName}" width="75" height="75" />
 						<a href="${pageContext.request.contextPath}/setProfilePic">choose profile picture</a>
 						</td> --%>
-						<td align="center">${userProfile.firstName}</td>
-						<td align="center">${userProfile.lastName}</td>
-						<td align="center">${userProfile.emailId}</td>
-						<td align="center">${userProfile.mobileNo}</td>
-						<%-- <td align="center"><fmt:formatDate value="${userProfile.dob}" pattern="dd/MM/yyyy"></fmt:formatDate></td> --%>
-						<%-- <td align="center"><fmt:formatDate value="${userProfile.createdDate}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
+							<td align="center">${userProfile.firstName}</td>
+							<td align="center">${userProfile.lastName}</td>
+							<td align="center">${userProfile.emailId}</td>
+							<td align="center">${userProfile.mobileNo}</td>
+							<%-- <td align="center"><fmt:formatDate value="${userProfile.dob}" pattern="dd/MM/yyyy"></fmt:formatDate></td> --%>
+							<%-- <td align="center"><fmt:formatDate value="${userProfile.createdDate}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
 						<td align="center"><fmt:formatDate value="${userProfile.lastUpdatedDate}" pattern="dd/MM/yyyy"></fmt:formatDate></td> --%>
-						<td align="center"><a href="${pageContext.request.contextPath}/editProfileForm/${userProfile.userid}">Edit</a></td>
-					</tr>
-			</tbody>
-		</table>
-	</div>
-	</section>
+							<td align="center"><a
+								href="${pageContext.request.contextPath}/editProfileForm/${userProfile.userid}">Edit</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
 	</main>
 	<!-- ######################################## footer content ########################################-->
 	<footer>

@@ -5,20 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>My Blog</title>
-<!-- <link rel="stylesheet" type="text/css" href="vendor/css/homepage.css"/> -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"> -->
 <style type="text/css">
 * {
 	margin: 0px;
 	padding: 0px;
-	/* background-image: url('./2.jpg'); */
 }
 
 body {
-  background-image: url("2.jpeg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+	background-image: url("2.jpeg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
 }
 
 /*####################################################################################################
@@ -26,10 +23,8 @@ body {
     ####################################################################################################*/
 header {
 	margin: auto;
-	/* border: 2px solid red; */
 	background-color: #5d2e2e;
 	height: 120px;
-	/* border-radius: 10px; */
 }
 
 img {
@@ -44,14 +39,12 @@ h1 {
 	text-align: center;
 	margin: 0px;
 	color: white;
-	padding-top:25px;
-	text-decoration:underline;
+	padding-top: 25px;
+	text-decoration: underline;
 }
 
 .navbar {
 	background-color: orange;
-	/* border-radius: 10px; */
-	/* border: 2px solid red; */
 }
 
 .navbar ul {
@@ -81,10 +74,11 @@ main or body content
 main {
 	width: 100%;
 	height: 74.3vh;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),url('/images/2.jpg');
+	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
+		url('/images/2.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-color:lightblue;
+	background-color: lightblue;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -121,7 +115,6 @@ section a {
 	padding: 12px 30px;
 	border-radius: 4px;
 	outline: none;
-	/*text-transform: uppercase;*/
 	font-size: 13px;
 	font-weight: 500;
 	text-decoration: none;
@@ -136,7 +129,6 @@ section .btn_login {
 section .btn_signup {
 	background: orange;
 }
-/*main or body section endened */
 
 /*####################################################################################################
 	footer section
@@ -144,9 +136,6 @@ section .btn_signup {
 footer {
 	width: 100%;
 	height: 5vh;
-	/*background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), url('../images/showcase.jpg');*/
-	/*background-repeat: no-repeat;*/
-	/*background-size: cover;*/
 	background-color: #5d2e2e;
 	text-align: center;
 	padding-top: 5px;
@@ -161,55 +150,37 @@ footer a {
 }
 </style>
 </head>
-<body background="https://1.bp.blogspot.com/-sTxAHAxirGM/WVbAe2098nI/AAAAAAABENs/_I5sYMYgLOUzaIE7FfF4qdGX-hoAkq9SgCLcBGAs/s1600/Blog_20170624_113552.jpg">
+<body
+	background="https://1.bp.blogspot.com/-sTxAHAxirGM/WVbAe2098nI/AAAAAAABENs/_I5sYMYgLOUzaIE7FfF4qdGX-hoAkq9SgCLcBGAs/s1600/Blog_20170624_113552.jpg">
 	<!-- ######################################## Header  content  ################################## -->
 	<header>
-		<!-- <img src="static/images/punya.PNG" alt="photo"> -->
 		<h1 color="cyan">Welcome To Courses Enrollment APP</h1>
 		<nav class="navbar">
 			<ul>
-				<!-- <li><a href="#">Reset Password</a></li> -->
-				<!-- <li><a href="#">My Profile</a></li> -->
-				<li><a href="${pageContext.request.contextPath}/view/courses">All Courses</a></li>
+				<li><a href="${pageContext.request.contextPath}/view/courses">All
+						Courses</a></li>
 				<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
 				<li><a href="${pageContext.request.contextPath}/register/form">Register</a></li>
 				<%-- <li><a href="${pageContext.request.contextPath}/view/contacts">My Contacts</a></li> --%>
-				
+
 				<%-- <li><a href="${pageContext.request.contextPath}/homePage">Home</a></li> --%>
 			</ul>
 		</nav>
 	</header>
 	<!-- ######################################## main or body  content  ################################## -->
 	<main>
-	<section>
-	   
-		<h3>Thank You for visiting this site</h3>
-		<h1 color="green">
-			<!-- Best Place to learn <span> Java Technologies</span> And <span>Tools</span> -->
-			Online Learning Made Easy
-		</h1>
-		<p>Better Way To Upgrade Your Skills</p>
-		<!-- <a href="login" class="btn_login">Log In</a> 
-		<a href="register/form" class="btn_signup">Sign Up</a> -->
-	</section>
+		<section>
+
+			<h3>Thank You for visiting this site</h3>
+			<h1 color="green">Online Learning Made Easy</h1>
+			<p>Better Way To Upgrade Your Skills</p>
+			<a href="register/form" class="btn_signup">Sign Up</a> -->
+		</section>
 	</main>
 	<!-- ######################################## footer content ########################################-->
 	<footer>
 		<a href="#">copy_write@Manisha_blog_spot</a>
 	</footer>
-	
-	<!-- keep for you future reference  -->
-	<!-- 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/js/custom.js"></script>
-	<script>
-	$(document).ready(function(){
-		$("#btn2").click(function(){
-			alert("Button 2 clicked");
-		});
-	});
-	</script> -->
+
 </body>
 </html>

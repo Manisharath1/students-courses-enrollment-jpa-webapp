@@ -17,10 +17,8 @@
     ####################################################################################################*/
 header {
 	margin: auto;
-	/* border: 2px solid red; */
 	background-color: #5d2e2e;
 	height: 120px;
-	/* border-radius: 10px; */
 }
 
 img {
@@ -41,8 +39,6 @@ h1 {
 
 .navbar {
 	background-color: orange;
-	/* border-radius: 10px; */
-	/* border: 2px solid red; */
 }
 
 .navbar ul {
@@ -112,7 +108,6 @@ section a {
 	padding: 12px 30px;
 	border-radius: 4px;
 	outline: none;
-	/*text-transform: uppercase;*/
 	font-size: 13px;
 	font-weight: 500;
 	text-decoration: none;
@@ -127,7 +122,6 @@ section .btn_login {
 section .btn_signup {
 	background: orange;
 }
-/*main or body section endened */
 
 /*####################################################################################################
 	footer section
@@ -135,9 +129,6 @@ section .btn_signup {
 footer {
 	width: 100%;
 	height: 5vh;
-	/*background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), url('../images/showcase.jpg');*/
-	/*background-repeat: no-repeat;*/
-	/*background-size: cover;*/
 	background-color: #5d2e2e;
 	text-align: center;
 	padding-top: 5px;
@@ -155,7 +146,6 @@ footer a {
 <body>
 <!-- ######################################## Header  content  ################################## -->
 	<header>
-		<!-- <img src="static/images/punya.PNG" alt="photo"> -->
 		<h1>Welcome To Course Registration APP</h1>
 		<nav class="navbar">
 			<ul>

@@ -6,7 +6,6 @@
 
 <title>All Courses</title>
 <style type="text/css">
-
 * {
 	margin: 0px;
 	padding: 0px;
@@ -15,13 +14,10 @@
 /*####################################################################################################
 	header section
     ####################################################################################################*/
-    
 header {
 	margin: auto;
-	/* border: 2px solid red; */
 	background-color: #5d2e2e;
 	height: 115px;
-	/* border-radius: 10px; */
 }
 
 img {
@@ -42,10 +38,8 @@ h1 {
 }
 
 .navbar {
-	background-color: orange;
-	//padding-top: 10px;
-	/* border-radius: 10px; */
-	/* border: 2px solid red; */
+	background-color: orange; //
+	padding-top: 10px;
 }
 
 .navbar ul {
@@ -75,10 +69,11 @@ main or body content
 main {
 	width: 100%;
 	height: 68.3vh;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),url('/images/2.jpg');
+	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
+		url('/images/2.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-color:lightblue;
+	background-color: lightblue;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -86,10 +81,6 @@ main {
 	color: black;
 }
 
-/* span {
-	background-color: blue;
-}
- */
 section h3 {
 	font-size: 35px;
 	font-weight: 200;
@@ -115,14 +106,12 @@ section a {
 	padding: 12px 10px;
 	border-radius: 4px;
 	outline: none;
-	/*text-transform: uppercase;*/
 	font-size: 13px;
 	font-weight: 500;
 	text-decoration: none;
 	letter-spacing: 1px;
 	color: blue;
 }
-
 
 section .btn_login {
 	background: orange;
@@ -136,7 +125,6 @@ section .btn_signup {
 	color: red;
 	font-style: bold;
 }
-/*main or body section endened */
 
 /*####################################################################################################
 	footer section
@@ -144,7 +132,8 @@ section .btn_signup {
 footer {
 	width: 100%;
 	height: 5vh;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)),url('../images/showcase.jpg');
+	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)),
+		url('../images/showcase.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-color: #5d2e2e;
@@ -162,57 +151,70 @@ footer a {
 </style>
 </head>
 <body>
-<!-- ######################################## Header  content  ################################## -->
+	<!-- ######################################## Header  content  ################################## -->
 	<header>
 		<h1 color="cyan">Welcome To Course Registration APP</h1>
 		<nav class="navbar">
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/view/enrolledcourses">My Enrolled Courses</a></li>
-				<li><a href="${pageContext.request.contextPath}/view/profile">My Profile</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/view/enrolledcourses">My
+						Enrolled Courses</a></li>
+				<li><a href="${pageContext.request.contextPath}/view/profile">My
+						Profile</a></li>
 				<li><a href="${pageContext.request.contextPath}/">Home</a></li>
 			</ul>
 		</nav>
 	</header>
 	<br>
 	<br>
- 	<h2 align="center">Welcome ${pageContext.request.userPrincipal.name} |  <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
-	 <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
-    </c:if>
-    <!-- ######################################## Body  content  ################################## -->
+	<h2 align="center">
+		Welcome ${pageContext.request.userPrincipal.name} | <a
+			onclick="document.forms['logoutForm'].submit()">Logout</a>
+	</h2>
+	<c:if test="${pageContext.request.userPrincipal.name != null}">
+		<form id="logoutForm" method="POST" action="${contextPath}/logout">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+	</c:if>
+	<!-- ######################################## Body  content  ################################## -->
 	<main>
-	<section>
-		<a class="button" href="${pageContext.request.contextPath}/course/form"><h3 color="green"><u>To Add a New Course , click here</u></h3></a>
-		<form action="<c:url value="/user/search/topic"/>">
-			<h2 color="green">Search By Topic Name:</h2><input type="text" name="topicName" placeholder="Enter topic name name"/>
-			<button>Search</button>
-		</form >
-		
-		<center>${enroll}</center>
-		
-		<H1 color="green">All Courses</H1>
-		<table border="2">
-			<thead>
-				<tr>
-					<th>Course Name</th>
-					<th>Topic Name</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${courseList}" var="course">
+		<section>
+			<a class="button"
+				href="${pageContext.request.contextPath}/course/form"><h3
+					color="green">
+					<u>To Add a New Course , click here</u>
+				</h3></a>
+			<form action="<c:url value="/user/search/topic"/>">
+				<h2 color="green">Search By Topic Name:</h2>
+				<input type="text" name="topicName"
+					placeholder="Enter topic name name" />
+				<button>Search</button>
+			</form>
+
+			<center>${enroll}</center>
+
+			<H1 color="green">All Courses</H1>
+			<table border="2">
+				<thead>
 					<tr>
-						<td align="center">${course.courseName}</td>
-						<td align="center">${course.topicName}</td>
-						<td align="center">
-						<a href="${pageContext.request.contextPath}/enroll/${course.topicName}" type="button">Enroll</a>
-						</td>
+						<th>Course Name</th>
+						<th>Topic Name</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</section>
+				</thead>
+				<tbody>
+					<c:forEach items="${courseList}" var="course">
+						<tr>
+							<td align="center">${course.courseName}</td>
+							<td align="center">${course.topicName}</td>
+							<td align="center"><a
+								href="${pageContext.request.contextPath}/enroll/${course.topicName}"
+								type="button">Enroll</a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</section>
 	</main>
 	<!-- ######################################## footer content ########################################-->
 	<footer>

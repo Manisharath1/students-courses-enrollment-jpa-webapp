@@ -5,7 +5,6 @@
 <head>
 <title>My Courses</title>
 <style type="text/css">
-
 * {
 	margin: 0px;
 	padding: 0px;
@@ -14,13 +13,10 @@
 /*####################################################################################################
 	header section
     ####################################################################################################*/
-    
 header {
 	margin: auto;
-	/* border: 2px solid red; */
 	background-color: #5d2e2e;
 	height: 115px;
-	/* border-radius: 10px; */
 }
 
 img {
@@ -41,10 +37,8 @@ h1 {
 }
 
 .navbar {
-	background-color: orange;
-	//padding-top: 10px;
-	/* border-radius: 10px; */
-	/* border: 2px solid red; */
+	background-color: orange; //
+	padding-top: 10px;
 }
 
 .navbar ul {
@@ -74,11 +68,12 @@ main or body content
 main {
 	width: 100%;
 	height: 70vh;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),url('/images/2.jpg');
+	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
+		url('/images/2.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-color:lightblue;
-	background-color:lightblue;
+	background-color: lightblue;
+	background-color: lightblue;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -102,7 +97,6 @@ section h1 {
 	font-weight: 700;
 	text-shadow: 2px 1px 5px black;
 	text-transform: uppercase;
-	
 }
 
 section p {
@@ -144,7 +138,8 @@ section .btn_signup {
 footer {
 	width: 100%;
 	height: 5vh;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)),url('../images/showcase.jpg');
+	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)),
+		url('../images/showcase.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-color: #5d2e2e;
@@ -162,64 +157,74 @@ footer a {
 </style>
 </head>
 <body>
-<!-- ######################################## Header  content  ################################## -->
+	<!-- ######################################## Header  content  ################################## -->
 	<header>
 		<!-- <img src="static/images/punya.PNG" alt="photo"> -->
 		<h1>Welcome To Course Registration APP</h1>
 		<nav class="navbar">
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/view/profile">My Profile</a></li>
-				<li><a href="${pageContext.request.contextPath}/view/courses">All Courses</a></li>
+				<li><a href="${pageContext.request.contextPath}/view/profile">My
+						Profile</a></li>
+				<li><a href="${pageContext.request.contextPath}/view/courses">All
+						Courses</a></li>
 			</ul>
 		</nav>
 	</header>
 	<br>
 	<br>
- 	<h2 align="center">Welcome ${pageContext.request.userPrincipal.name} |  <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
-	 <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
-    </c:if>
-    <!-- ######################################## Body  content  ################################## -->
+	<h2 align="center">
+		Welcome ${pageContext.request.userPrincipal.name} | <a
+			onclick="document.forms['logoutForm'].submit()">Logout</a>
+	</h2>
+	<c:if test="${pageContext.request.userPrincipal.name != null}">
+		<form id="logoutForm" method="POST" action="${contextPath}/logout">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+	</c:if>
+	<!-- ######################################## Body  content  ################################## -->
 	<main>
-	
-	
-	<section>
-		
-		<br>
-		
-		<form action="<c:url value="/user/search/enrolled/topic"/>">
-			<h3 color="green">Search By Topic Name:</h3><input type="text" name="topicName" placeholder="Enter topic name name"/>
-			<button>Search</button>
-		</form >
-		
-		<br>
-		
-		<H1 color="green">My Enrolled Courses</H1>
-		
-		
-		<table border="1">
-			<thead>
-				<tr>
-					<th>Course Name</th>
-					<th>Topic Name</th>
-					<th>Refer Text</th>
-					<th>Refer Video</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${enrolledCourseList}" var="course">
+
+
+		<section>
+
+			<br>
+
+			<form action="<c:url value="/user/search/enrolled/topic"/>">
+				<h3 color="green">Search By Topic Name:</h3>
+				<input type="text" name="topicName"
+					placeholder="Enter topic name name" />
+				<button>Search</button>
+			</form>
+
+			<br>
+
+			<H1 color="green">My Enrolled Courses</H1>
+
+
+			<table border="1">
+				<thead>
 					<tr>
-						<td align="center">${course.courseName}</td>
-						<td align="center">${course.topicName}</td>
-						<td><a target="_blank" href="${course.refUrlText}">Ref Url Text</a></td>
-						<td><a target="_blank" href="${course.refUrlVideo}">Ref Url video</a></td>
+						<th>Course Name</th>
+						<th>Topic Name</th>
+						<th>Refer Text</th>
+						<th>Refer Video</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</section>
+				</thead>
+				<tbody>
+					<c:forEach items="${enrolledCourseList}" var="course">
+						<tr>
+							<td align="center">${course.courseName}</td>
+							<td align="center">${course.topicName}</td>
+							<td><a target="_blank" href="${course.refUrlText}">Ref
+									Url Text</a></td>
+							<td><a target="_blank" href="${course.refUrlVideo}">Ref
+									Url video</a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</section>
 	</main>
 	<!-- ######################################## footer content ########################################-->
 	<footer>

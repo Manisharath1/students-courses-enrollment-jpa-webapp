@@ -3,7 +3,6 @@
 <html>
 <head>
 <style type="text/css">
-
 * {
 	margin: 0px;
 	padding: 0px;
@@ -14,10 +13,8 @@
     ####################################################################################################*/
 header {
 	margin: auto;
-	/* border: 2px solid red; */
 	background-color: #5d2e2e;
 	height: 118px;
-	/* border-radius: 10px; */
 }
 
 img {
@@ -31,14 +28,12 @@ img {
 h1 {
 	text-align: center;
 	margin: 0px;
-	padding-top:30px;
+	padding-top: 30px;
 	color: white;
 }
 
 .navbar {
 	background-color: orange;
-	/* border-radius: 10px; */
-	/* border: 2px solid red; */
 }
 
 .navbar ul {
@@ -68,21 +63,18 @@ main or body content
 main {
 	width: 100%;
 	height: 65.3vh;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),url('/images/2.jpg');
+	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
+		url('/images/2.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-color:lightblue;
-	background-color:lightblue;
+	background-color: lightblue;
+	background-color: lightblue;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
 	color: white;
 }
-
-/* span {
-	background-color: blue;
-} */
 
 section h3 {
 	font-size: 35px;
@@ -109,7 +101,6 @@ section a {
 	padding: 12px 30px;
 	border-radius: 4px;
 	outline: none;
-	/*text-transform: uppercase;*/
 	font-size: 13px;
 	font-weight: 500;
 	text-decoration: none;
@@ -126,11 +117,9 @@ section .btn_signup {
 }
 
 .errormsg {
-    color: red;
-    font-style:bold;
+	color: red;
+	font-style: bold;
 }
-
-/*main or body section endened */
 
 /*####################################################################################################
 	footer section
@@ -138,9 +127,6 @@ section .btn_signup {
 footer {
 	width: 100%;
 	height: 5vh;
-	/*background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), url('../images/showcase.jpg');*/
-	/*background-repeat: no-repeat;*/
-	/*background-size: cover;*/
 	background-color: #5d2e2e;
 	text-align: center;
 	padding-top: 5px;
@@ -156,67 +142,76 @@ footer a {
 </style>
 </head>
 <body>
-<!-- ######################################## Header  content  ################################## -->
+	<!-- ######################################## Header  content  ################################## -->
 	<header>
-		<!-- <img src="static/images/punya.PNG" alt="photo"> -->
 		<h1>Welcome To Course Registration App</h1>
 		<nav class="navbar">
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/view/courses">All Courses</a></li>
-				<li><a href="${pageContext.request.contextPath}/view/profile">My Profile</a></li>
+				<li><a href="${pageContext.request.contextPath}/view/courses">All
+						Courses</a></li>
+				<li><a href="${pageContext.request.contextPath}/view/profile">My
+						Profile</a></li>
 			</ul>
 		</nav>
 	</header>
 	<br>
 	<br>
-	
- <h2 align="center">Welcome ${pageContext.request.userPrincipal.name} |  <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
-	 <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
-    </c:if>
-     <!-- ######################################## main or body  content  ################################## -->
-<main>
-   <section>
-	<h1><u>Edit Course Details</u></h1>
-	<form:form method="POST" action="${pageContext.request.contextPath}/course/update" modelAttribute="courseUpdate">
-		<table>
-			<tr>
-				<td>Course Id</td>
-				<td><form:input path="courseid" readonly="true"/></td>
-			</tr>
-			
-			<tr>
-				<td>Course Name :</td>
-				<td><form:input path="courseName" /></td>
-				<td><form:errors path = "courseName" cssClass = "errormsg" /></td>
-			</tr>
-			<tr>
-				<td>Topic Name :</td>
-				<td><form:input path="topicName"/></td>
-				<td><form:errors path = "topicName" cssClass = "errormsg" /></td>
-			</tr>
-			<tr>
-				<td>Ref Url Text :</td>
-				<td><form:input path="refUrlText" /></td>
-				<td><form:errors path = "refUrlText" cssClass = "errormsg" /></td>
-			</tr>
-			<tr>
-				<td>Ref Url Video :</td>
-				<td><form:input path="refUrlVideo" /></td>
-				<td><form:errors path = "refUrlVideo" cssClass = "errormsg" /></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="submit" value="Update" /></td>
-			</tr>
-		</table>
-	</form:form>
-	</section>
+
+	<h2 align="center">
+		Welcome ${pageContext.request.userPrincipal.name} | <a
+			onclick="document.forms['logoutForm'].submit()">Logout</a>
+	</h2>
+	<c:if test="${pageContext.request.userPrincipal.name != null}">
+		<form id="logoutForm" method="POST" action="${contextPath}/logout">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+	</c:if>
+	<!-- ######################################## main or body  content  ################################## -->
+	<main>
+		<section>
+			<h1>
+				<u>Edit Course Details</u>
+			</h1>
+			<form:form method="POST"
+				action="${pageContext.request.contextPath}/course/update"
+				modelAttribute="courseUpdate">
+				<table>
+					<tr>
+						<td>Course Id</td>
+						<td><form:input path="courseid" readonly="true" /></td>
+					</tr>
+
+					<tr>
+						<td>Course Name :</td>
+						<td><form:input path="courseName" /></td>
+						<td><form:errors path="courseName" cssClass="errormsg" /></td>
+					</tr>
+					<tr>
+						<td>Topic Name :</td>
+						<td><form:input path="topicName" /></td>
+						<td><form:errors path="topicName" cssClass="errormsg" /></td>
+					</tr>
+					<tr>
+						<td>Ref Url Text :</td>
+						<td><form:input path="refUrlText" /></td>
+						<td><form:errors path="refUrlText" cssClass="errormsg" /></td>
+					</tr>
+					<tr>
+						<td>Ref Url Video :</td>
+						<td><form:input path="refUrlVideo" /></td>
+						<td><form:errors path="refUrlVideo" cssClass="errormsg" /></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Update" /></td>
+					</tr>
+				</table>
+			</form:form>
+		</section>
 	</main>
 	<footer>
-           <a href="#">copy_write@manisha_blog_spot</a>
-       </footer>
+		<a href="#">copy_write@manisha_blog_spot</a>
+	</footer>
 </body>
 </html>

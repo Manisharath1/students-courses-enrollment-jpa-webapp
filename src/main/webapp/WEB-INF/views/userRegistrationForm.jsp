@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
@@ -17,10 +17,8 @@
     ####################################################################################################*/
 header {
 	margin: auto;
-	/* border: 2px solid red; */
 	background-color: #5d2e2e;
 	height: 120px;
-	/* border-radius: 10px; */
 }
 
 img {
@@ -35,14 +33,12 @@ h1 {
 	text-align: center;
 	margin: 0px;
 	color: white;
-	padding-top:25px;
-	text-decoration:underline;
+	padding-top: 25px;
+	text-decoration: underline;
 }
 
 .navbar {
 	background-color: orange;
-	/* border-radius: 10px; */
-	/* border: 2px solid red; */
 }
 
 .navbar ul {
@@ -72,10 +68,11 @@ main or body content
 main {
 	width: 100%;
 	height: 74.3vh;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),url('/images/2.jpg');
+	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
+		url('/images/2.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-color:lightblue;
+	background-color: lightblue;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -112,7 +109,6 @@ section a {
 	padding: 12px 30px;
 	border-radius: 4px;
 	outline: none;
-	/*text-transform: uppercase;*/
 	font-size: 13px;
 	font-weight: 500;
 	text-decoration: none;
@@ -127,7 +123,6 @@ section .btn_login {
 section .btn_signup {
 	background: orange;
 }
-/*main or body section endened */
 
 /*####################################################################################################
 	footer section
@@ -135,9 +130,6 @@ section .btn_signup {
 footer {
 	width: 100%;
 	height: 5vh;
-	/*background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), url('../images/showcase.jpg');*/
-	/*background-repeat: no-repeat;*/
-	/*background-size: cover;*/
 	background-color: #5d2e2e;
 	text-align: center;
 	padding-top: 5px;
@@ -153,74 +145,77 @@ footer a {
 </style>
 </head>
 <body>
-<!-- ######################################## Header  content  ################################## -->
+	<!-- ######################################## Header  content  ################################## -->
 	<header>
-		<!-- <img src="static/images/punya.PNG" alt="photo"> -->
 		<h1>Welcome To Course Enrollment APP</h1>
 		<nav class="navbar">
 			<ul>
-			<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+				<li><a href="${pageContext.request.contextPath}/login">Login</a></li>
 				<li><a href="${pageContext.request.contextPath}/">Home</a></li>
 			</ul>
 		</nav>
 	</header>
-	
+
 	<br>
 	<center>${resp}</center>
 	<main>
-	<section>
-	<h1><u>User Registration Form</u></h1>
-	<form:form action="${pageContext.request.contextPath}/register/save" method="post" modelAttribute="userRegForm">
-		<table>
-			<tr>
-				<td align="right">First Name:</td>
-				<td><form:input path="firstName" /></td>
-				 <td><form:errors path = "firstName" cssClass = "errormsg" /></td>
-			</tr>
-			<tr>
-				<td align="right">Last Name:</td>
-				<td><form:input path="lastName"/></td>
-				 <td><form:errors path = "lastName" cssClass = "errormsg" /></td>
-			</tr>
-			<tr>
-				<td align="right">Email ID:</td>
-				<td><form:input path="emailId"/></td>
-				 <td><form:errors path = "emailId" cssClass = "errormsg" /></td>
-			</tr>
-			<tr>
-				<td align="right"> Mobile No:</td>
-				<td><form:input path="mobileNo"/></td>
-				 <td><form:errors path = "mobileNo" cssClass = "errormsg" /></td>
-			</tr>
-			<%-- <tr>
+		<section>
+			<h1>
+				<u>User Registration Form</u>
+			</h1>
+			<form:form action="${pageContext.request.contextPath}/register/save"
+				method="post" modelAttribute="userRegForm">
+				<table>
+					<tr>
+						<td align="right">First Name:</td>
+						<td><form:input path="firstName" /></td>
+						<td><form:errors path="firstName" cssClass="errormsg" /></td>
+					</tr>
+					<tr>
+						<td align="right">Last Name:</td>
+						<td><form:input path="lastName" /></td>
+						<td><form:errors path="lastName" cssClass="errormsg" /></td>
+					</tr>
+					<tr>
+						<td align="right">Email ID:</td>
+						<td><form:input path="emailId" /></td>
+						<td><form:errors path="emailId" cssClass="errormsg" /></td>
+					</tr>
+					<tr>
+						<td align="right">Mobile No:</td>
+						<td><form:input path="mobileNo" /></td>
+						<td><form:errors path="mobileNo" cssClass="errormsg" /></td>
+					</tr>
+					<%-- <tr>
 				<td align="right">Date Of Birth:</td>
 				<td><form:input type="date" path="dob" size="90"/></td>
 				 <td><form:errors path = "dob" cssClass = "errormsg" /></td>
 			</tr> --%>
-			 <tr>
-				<td align="right">Login Username:</td>
-				<td><form:input path="loginUsername" /></td>
-				 <td><form:errors path = "loginUsername" cssClass = "errormsg" /></td>
-			</tr>
-			<tr>
-				<td align="right">Login Password:</td>
-				<td><form:password path="loginPassword" /></td>
-				 <td><form:errors path = "loginPassword" cssClass = "errormsg" /></td>
-			</tr>
-			<tr>
-				<td align="right">Admin Code(Optional):</td>
-				<td><form:password path="adminCode" /></td>
-				<%--  <td><form:errors path = "adminCode" cssClass = "errormsg" /></td> --%>
-			</tr>
-			<tr>
-				<td></td>
-				<td colspan="3" align="right"><input type="reset" value="Reset" />&nbsp;&nbsp;<input type="submit" value="Save" /></td>
-			</tr>
-		</table>
-	</form:form>
-</section>
-</main>
-<!-- ######################################## footer content ########################################-->
+					<tr>
+						<td align="right">Login Username:</td>
+						<td><form:input path="loginUsername" /></td>
+						<td><form:errors path="loginUsername" cssClass="errormsg" /></td>
+					</tr>
+					<tr>
+						<td align="right">Login Password:</td>
+						<td><form:password path="loginPassword" /></td>
+						<td><form:errors path="loginPassword" cssClass="errormsg" /></td>
+					</tr>
+					<tr>
+						<td align="right">Admin Code(Optional):</td>
+						<td><form:password path="adminCode" /></td>
+						<%--  <td><form:errors path = "adminCode" cssClass = "errormsg" /></td> --%>
+					</tr>
+					<tr>
+						<td></td>
+						<td colspan="3" align="right"><input type="reset"
+							value="Reset" />&nbsp;&nbsp;<input type="submit" value="Save" /></td>
+					</tr>
+				</table>
+			</form:form>
+		</section>
+	</main>
+	<!-- ######################################## footer content ########################################-->
 	<footer>
 		<a href="#">copy_write@punya_blog_spot</a>
 	</footer>

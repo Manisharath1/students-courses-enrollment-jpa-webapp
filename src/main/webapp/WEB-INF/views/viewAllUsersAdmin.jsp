@@ -6,7 +6,6 @@
 
 <title>All Courses</title>
 <style type="text/css">
-
 * {
 	margin: 0px;
 	padding: 0px;
@@ -15,13 +14,10 @@
 /*####################################################################################################
 	header section
     ####################################################################################################*/
-    
 header {
 	margin: auto;
-	/* border: 2px solid red; */
 	background-color: #5d2e2e;
 	height: 115px;
-	/* border-radius: 10px; */
 }
 
 img {
@@ -42,10 +38,8 @@ h1 {
 }
 
 .navbar {
-	background-color: orange;
-	//padding-top: 10px;
-	/* border-radius: 10px; */
-	/* border: 2px solid red; */
+	background-color: orange; //
+	padding-top: 10px;
 }
 
 .navbar ul {
@@ -75,10 +69,11 @@ main or body content
 main {
 	width: 100%;
 	height: 70.3vh;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),url('/images/2.jpg');
+	background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
+		url('/images/2.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-color:lightblue;
+	background-color: lightblue;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -143,7 +138,8 @@ section .btn_signup {
 footer {
 	width: 100%;
 	height: 5vh;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)),url('../images/showcase.jpg');
+	background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)),
+		url('../images/showcase.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-color: #5d2e2e;
@@ -161,54 +157,58 @@ footer a {
 </style>
 </head>
 <body>
-<!-- ######################################## Header  content  ################################## -->
+	<!-- ######################################## Header  content  ################################## -->
 	<header>
-		<!-- <img src="static/images/punya.PNG" alt="photo"> -->
 		<h1 color="cyan">Welcome To Course Registration APP</h1>
 		<nav class="navbar">
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/view/profile">My Profile</a></li>
+				<li><a href="${pageContext.request.contextPath}/view/profile">My
+						Profile</a></li>
 			</ul>
 		</nav>
 	</header>
 	<br>
 	<br>
- 	<h2 align="center">Welcome ${pageContext.request.userPrincipal.name} |  <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
-	 <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
-    </c:if>
-    <!-- ######################################## Body  content  ################################## -->
+	<h2 align="center">
+		Welcome ${pageContext.request.userPrincipal.name} | <a
+			onclick="document.forms['logoutForm'].submit()">Logout</a>
+	</h2>
+	<c:if test="${pageContext.request.userPrincipal.name != null}">
+		<form id="logoutForm" method="POST" action="${contextPath}/logout">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+	</c:if>
+	<!-- ######################################## Body  content  ################################## -->
 	<main>
-	<section>
-		<%-- <form action="<c:url value="/admin/search/user"/>">
+		<section>
+			<%-- <form action="<c:url value="/admin/search/user"/>">
 			Search By User Name:<input type="text" name="userName" placeholder="Enter Topic name"/>
 			<button>Search</button>
 		</form > --%>
-		
-		<H1 color="green">All Users</H1>
-		<table border="1">
-			<thead>
-				<tr>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Email ID</th>
-					<th>Mob No</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${usersList}" var="user">
+
+			<H1 color="green">All Users</H1>
+			<table border="1">
+				<thead>
 					<tr>
-						<td align="center">${user.firstName}</td>
-						<td align="center">${user.lastName}</td>
-						<td align="center">${user.emailId}</td>
-						<td align="center">${user.mobileNo}</td>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email ID</th>
+						<th>Mob No</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</section>
+				</thead>
+				<tbody>
+					<c:forEach items="${usersList}" var="user">
+						<tr>
+							<td align="center">${user.firstName}</td>
+							<td align="center">${user.lastName}</td>
+							<td align="center">${user.emailId}</td>
+							<td align="center">${user.mobileNo}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</section>
 	</main>
 	<!-- ######################################## footer content ########################################-->
 	<footer>

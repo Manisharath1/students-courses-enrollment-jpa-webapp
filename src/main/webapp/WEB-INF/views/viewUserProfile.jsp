@@ -39,8 +39,6 @@ h1 {
 
 .navbar {
 	background-color: orange;
-	/* border-radius: 10px; */
-	/* border: 2px solid red; */
 }
 
 .navbar ul {
@@ -81,10 +79,7 @@ main {
 	color: black;
 }
 
-/* span {
-	background-color: blue;
-}
- */
+
 section h3 {
 	font-size: 35px;
 	font-weight: 200;
@@ -110,7 +105,6 @@ section a {
 	padding: 12px 30px;
 	border-radius: 4px;
 	outline: none;
-	/*text-transform: uppercase;*/
 	font-size: 13px;
 	font-weight: 500;
 	text-decoration: none;
@@ -130,7 +124,6 @@ section .btn_signup {
 	color: red;
 	font-style: bold;
 }
-/*main or body section endened */
 
 /*####################################################################################################
 	footer section
@@ -138,9 +131,6 @@ section .btn_signup {
 footer {
 	width: 100%;
 	height: 5vh;
-	/*background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.1)), url('../images/showcase.jpg');*/
-	/*background-repeat: no-repeat;*/
-	/*background-size: cover;*/
 	background-color: #5d2e2e;
 	text-align: center;
 	padding-top: 5px;
@@ -183,15 +173,10 @@ footer a {
 		<table border="1">
 			<thead>
 				<tr>
-					<!-- <th>ID</th> -->
-					<!-- <th>My Profile Picture</th> -->
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Email ID</th>
 					<th>Mobile No</th>
-					<!-- <th>Date Of Birth</th> -->
-					<!-- <th>Created Date</th>
-					<th>Last Modified Date</th> -->
 					<th>Action</th>
 				</tr>
 			</thead>
