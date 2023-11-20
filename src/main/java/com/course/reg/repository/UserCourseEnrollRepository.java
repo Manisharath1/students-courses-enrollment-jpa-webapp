@@ -12,7 +12,6 @@ import com.course.reg.model.UserCourseEnroll;
 public interface UserCourseEnrollRepository extends JpaRepository<UserCourseEnroll, Long> {
 
 	List<UserCourseEnroll> findTopicByLoginUsername(String loginUsername);
-
 	UserCourseEnroll findByLoginUsernameAndTopicName(String loginusername, String topicName);
 	Optional<List<UserCourseEnroll>> findByLoginUsernameAndTopicNameIgnoreCaseContaining(String loginusername,String topicName);
 
