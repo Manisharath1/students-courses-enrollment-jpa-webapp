@@ -15,12 +15,9 @@ public interface UserService extends UserDetailsService{
 	public UserReg findUserProfileByUserId(Long userid);
 	public UserReg findUserProfileByLoginUsername(String loginusername);
 	public void updateUserProfile(UserReg userProfile);
-	//public void updateProfilePicNameForCurrentLoggedInUser(String profilePicfileName, String loginUsername);
-	//public void updateContctPicNameForCurrentLoggedInUsername(String contactPicfileName, Long contactId);
 	public List<Course> getAllEnrolledCoursesByLoginUsername(String loginUsername);
 	public List<Course> getAllCourses();
 	public List<UserReg> getAllUsers();
-	//public String enrollTopicName(String loginusername,String topicName);
 	public Optional<List<Course>> searchAllTopicsByTopicName(String topicName);
 	public String saveCourse(Course course);
 	public Course getCourseByCourseId(Long courseId);

@@ -13,11 +13,7 @@ public class UserCourseEnroll {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	//@Column(name = "login_username")
 	private String loginUsername;
-
-	//@Column(name = "topic_name")
 	private String topicName;
 	
 	public UserCourseEnroll() {}

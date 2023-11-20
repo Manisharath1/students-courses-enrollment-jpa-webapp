@@ -15,12 +15,11 @@ import org.springframework.web.client.RestTemplate;
 
 import com.course.reg.controller.UsersMvcController;
 
-@EntityScan(basePackages={"com.course.reg.model"})@EnableJpaRepositories(basePackages={"com.course.reg.repository"})
+@EntityScan(basePackages = { "com.course.reg.model" })
+@EnableJpaRepositories(basePackages = { "com.course.reg.repository" })
 
 @SpringBootApplication
 public class CourseRegistrationApp {
-
-	
 
 	public static void main(String[] args) {
 		new File(UsersMvcController.uploadDirectory.toString()).mkdir();

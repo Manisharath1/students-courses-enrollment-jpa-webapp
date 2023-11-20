@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 
 @Entity
 @Table(name = "users_details")
@@ -25,62 +23,33 @@ public class UserReg {
 
 	@NotEmpty(message = "First name should not be empty")
 	@Column(name = "first_name")
-	// @NotNull(message = "Firstname should not be empty")
-	//@Size(min = 5, max = 20)
 	private String firstName;
 
 	@NotEmpty(message = "Last name should not be empty")
 	@Column(name = "last_name")
-	// @NotBlank(message = "Lastname should not be empty")
-	//@Size(min = 5, max = 20)
 	private String lastName;
 
 	@NotEmpty(message = "Email should not be empty")
 	//@Size(min = 10, max = 20)
 	@Column(name = "email_id")
-	// @NotBlank(message = "Email should not be empty")
-	//@Email(message = "Please enter a valid e-mail address")
 	private String emailId;
 
 	@NotEmpty(message = "Mobile No should not be empty")
 	//@Size(min=10,max = 10)
 	@Column(name = "mobile_no")
-	// @NotBlank(message = "Mobile No should not be empty")
-	// @Size(min = 10, max = 10, message = "Please provide your 10 digit mobile no")
 	private String mobileNo;
 
-	//@NotNull(message = "Date of birth should not be empty")
-	//@Column(name = "dob")
-	//@NotNull(message = "Date Of Birth should not be empty")
-	//@Past(message = "Birth date must be the past date")
-	//@DateTimeFormat(pattern = "dd/MM/yyyy")
-	//private Date dob;
-
-	// @Column(name = "createdDate")
-	// private Date createdDate;
-
-	// @Column(name = "lastUpdatedDate")
-	// private Date lastUpdatedDate;
-
 	@NotEmpty(message = "Login Username should not be empty")
-	//@Size(min=5,max = 10)
-	//@Transient
 	@Column(name = "login_username")
-	// @NotBlank(message = "Login username should not be empty")
 	private String loginUsername;
 
-	//@Size(min=5,max = 10)
 	@Transient
-	//@Column(name = "login_password")
-	//@NotEmpty(message = "Login Password should not be empty")
 	private String loginPassword;
 
 	@Transient
-	//@Column(name = "user_role")
 	private String userRole;
 
 	@Transient
-	//@Column(name = "enabled")
 	private Integer enabled;
 
 	@Transient
@@ -98,9 +67,6 @@ public class UserReg {
 		this.lastName = lastName;
 		this.emailId = emailId;
 		this.mobileNo = mobileNo;
-		//this.dob = dob;
-		// this.createdDate = createdDate;
-		// this.lastUpdatedDate = lastUpdatedDate;
 		this.loginUsername = loginUsername;
 		this.loginPassword = loginPassword;
 		this.userRole = role;
@@ -159,26 +125,6 @@ public class UserReg {
 	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
 	}
-
-	/*public Date getDob() {
-		return dob;
-	}
-
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}*/
-
-	/*
-	 * public Date getCreatedDate() { return createdDate; }
-	 * 
-	 * public void setCreatedDate(Date createdDate) { this.createdDate =
-	 * createdDate; }
-	 * 
-	 * public Date getLastUpdatedDate() { return lastUpdatedDate; }
-	 * 
-	 * public void setLastUpdatedDate(Date lastUpdatedDate) { this.lastUpdatedDate =
-	 * lastUpdatedDate; }
-	 */
 
 	public String getLoginUsername() {
 		return loginUsername;
