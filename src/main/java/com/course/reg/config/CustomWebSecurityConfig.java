@@ -34,7 +34,7 @@ public class CustomWebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.headers().frameOptions().disable()
 		.and()
 		.authorizeRequests()
-		.antMatchers("./uploads/**","/resources/**","static/css","static/js","/h2-console/**","/","/homePage","/register/**","/api/rest/consumer/homePage","/api/rest/consumer/register/form","/api/rest/register","/view/courses").permitAll()
+		.antMatchers("./uploads/**","/resources/**","static/css","static/js","/h2-console/**","/","/homePage","/register/**","/api/rest/consumer/homePage","/api/rest/consumer/register/form","/api/rest/register","/view/courses","/user/search/topic").permitAll()
 		.antMatchers("/course/form").hasRole("ADMIN")
 		.antMatchers("/view/users").hasRole("ADMIN")
 		.anyRequest().fullyAuthenticated()

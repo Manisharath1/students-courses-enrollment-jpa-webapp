@@ -1,0 +1,60 @@
+
+create database studentscoursesenrollmentjpawebapp;
+use studentscoursesenrollmentjpawebapp;
+
+ DROP TABLE IF EXISTS users_details;
+ DROP TABLE IF EXISTS courses_details;
+ DROP TABLE IF EXISTS users_enrolled_courses_details;
+ DROP TABLE IF EXISTS users_login;
+
+create table users_details (
+	userid bigint AUTO_INCREMENT, 
+	first_name varchar(255), 
+	last_name varchar(255), 
+	email_id varchar(255),
+	mobile_no varchar(255),
+    login_username varchar(255), 
+	primary key (userid)
+);
+
+create table courses_details (
+	courseid bigint AUTO_INCREMENT, 
+	course_name varchar(255), 
+    topic_name varchar(255), 
+	ref_url_text varchar(255), 
+	ref_url_video varchar(255), 
+	primary key (courseid)
+);
+
+create table users_enrolled_courses_details (
+	enrollmentid bigint primary key AUTO_INCREMENT, 
+	login_username varchar(255), 
+	topic_name varchar(255)
+);
+
+create table users_login (
+	loginid bigint primary key AUTO_INCREMENT, 
+	login_username varchar(255), 
+	login_password varchar(255),
+	user_role varchar(255), 
+	enabled integer
+);
+
+
+insert into users_details (userid,first_name, last_name,email_id, mobile_no,login_username) values ( 1,'Punyasmruti', 'Nayak', 'punya@gmail.com', '134567890','punya');
+insert into users_details ( userid,first_name, last_name,email_id, mobile_no, login_username) values (2,'Aswini', 'Kumar', 'aswini@gmail.com', '98765431','aswini');
+
+insert into courses_details ( course_name, ref_url_text, ref_url_video, topic_name) values ( 'Java', 'https://wwww.google.com', 'https://www.youtube.com', 'Core Java');
+insert into courses_details ( course_name, ref_url_text, ref_url_video, topic_name) values ( 'Java', 'https://wwww.google.com', 'https://www.youtube.com', 'Advanced Java');
+insert into courses_details ( course_name, ref_url_text, ref_url_video, topic_name) values ( 'Java', 'https://wwww.google.com', 'https://www.youtube.com', 'Hibernate');
+
+insert into users_enrolled_courses_details(login_username,topic_name) values('punya','Core Java');
+insert into users_enrolled_courses_details(login_username,topic_name) values('punya','Advanced Java');
+
+-- Normal user
+insert into users_login(loginid,login_username, login_password,user_role, enabled) values(1,'punya', '$2a$10$g5fAs.BoSvFLeTwdRst/GuwWFI7Sr12LX4uBr0s8d2pBgzyMUq68e','ROLE_USER',1);
+-- Admin User
+insert into users_login(loginid,login_username, login_password,user_role, enabled) values(2,'aswini', '$2a$10$g5fAs.BoSvFLeTwdRst/GuwWFI7Sr12LX4uBr0s8d2pBgzyMUq68e','ROLE_ADMIN',1);
+    
+commit;
+
