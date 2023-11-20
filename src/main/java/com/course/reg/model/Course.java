@@ -15,20 +15,20 @@ public class Course {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long courseid;
 
-	@NotEmpty(message = "Course name should be minimum 4 chars")
+	@NotEmpty(message = "Course name should not be empty")
     //@Size(min=4,message="course name should be minimum 4 chars") 
 	//@Column(name = "courseName")
 	private String courseName;
 
-	@NotEmpty(message = "Topic name should be minimum 4 chars")
+	@NotEmpty(message = "Topic name should not be empty")
 	//@Column(name = "topicName")
 	private String topicName;
 
-	@NotEmpty(message = "Ref url text should be minimum 10 chars")
+	@NotEmpty(message = "Ref url text should not be empty")
 	//@Column(name = "refUrlText")
 	private String refUrlText;
 
-	@NotEmpty(message = "Ref url video should be minimum 10 chars")
+	@NotEmpty(message = "Ref url video should not be empty")
 	//@Column(name = "refUrlVideo")
 	private String refUrlVideo;
 

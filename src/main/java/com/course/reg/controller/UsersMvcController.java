@@ -122,6 +122,7 @@ public class UsersMvcController {
 		if (br.hasErrors()) {
 			return "updateUserProfileForm";
 		}
+		System.out.println(userReg);
 		userService.updateUserProfile(userReg);
 		return "redirect:/view/profile";
 	}

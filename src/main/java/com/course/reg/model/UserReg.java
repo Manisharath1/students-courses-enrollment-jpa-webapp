@@ -10,7 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 @Entity
 @Table(name = "users_details")
@@ -34,7 +35,7 @@ public class UserReg {
 	//@Size(min = 5, max = 20)
 	private String lastName;
 
-	@NotEmpty(message = "Email should be empty")
+	@NotEmpty(message = "Email should not be empty")
 	//@Size(min = 10, max = 20)
 	@Column(name = "email_id")
 	// @NotBlank(message = "Email should not be empty")
@@ -48,11 +49,12 @@ public class UserReg {
 	// @Size(min = 10, max = 10, message = "Please provide your 10 digit mobile no")
 	private String mobileNo;
 
-	@Column(name = "dob")
-	// @NotNull(message = "Date Of Birth should not be empty")
-	// @Past(message = "Birth date must be the past date")
-	// @DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date dob;
+	//@NotNull(message = "Date of birth should not be empty")
+	//@Column(name = "dob")
+	//@NotNull(message = "Date Of Birth should not be empty")
+	//@Past(message = "Birth date must be the past date")
+	//@DateTimeFormat(pattern = "dd/MM/yyyy")
+	//private Date dob;
 
 	// @Column(name = "createdDate")
 	// private Date createdDate;
@@ -70,7 +72,7 @@ public class UserReg {
 	//@Size(min=5,max = 10)
 	@Transient
 	//@Column(name = "login_password")
-	@NotEmpty(message = "Login Password should not be empty")
+	//@NotEmpty(message = "Login Password should not be empty")
 	private String loginPassword;
 
 	@Transient
@@ -96,7 +98,7 @@ public class UserReg {
 		this.lastName = lastName;
 		this.emailId = emailId;
 		this.mobileNo = mobileNo;
-		this.dob = dob;
+		//this.dob = dob;
 		// this.createdDate = createdDate;
 		// this.lastUpdatedDate = lastUpdatedDate;
 		this.loginUsername = loginUsername;
@@ -158,13 +160,13 @@ public class UserReg {
 		this.mobileNo = mobileNo;
 	}
 
-	public Date getDob() {
+	/*public Date getDob() {
 		return dob;
 	}
 
 	public void setDob(Date dob) {
 		this.dob = dob;
-	}
+	}*/
 
 	/*
 	 * public Date getCreatedDate() { return createdDate; }
@@ -209,7 +211,7 @@ public class UserReg {
 	@Override
 	public String toString() {
 		return "UserReg [userid=" + userid + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId="
-				+ emailId + ", mobileNo=" + mobileNo + ", dob=" + dob + ", loginUsername=" + loginUsername
+				+ emailId + ", mobileNo=" + mobileNo + ", loginUsername=" + loginUsername
 				+ ", loginPassword=" + loginPassword + ", userRole=" + userRole + ", enabled=" + enabled
 				+ ", adminCode=" + adminCode + "]";
 	}

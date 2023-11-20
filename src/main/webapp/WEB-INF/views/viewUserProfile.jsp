@@ -189,7 +189,7 @@ footer a {
 					<th>Last Name</th>
 					<th>Email ID</th>
 					<th>Mobile No</th>
-					<th>Date Of Birth</th>
+					<!-- <th>Date Of Birth</th> -->
 					<!-- <th>Created Date</th>
 					<th>Last Modified Date</th> -->
 					<th>Action</th>
@@ -205,7 +205,7 @@ footer a {
 						<td align="center">${userProfile.lastName}</td>
 						<td align="center">${userProfile.emailId}</td>
 						<td align="center">${userProfile.mobileNo}</td>
-						<td align="center"><fmt:formatDate value="${userProfile.dob}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
+						<%-- <td align="center"><fmt:formatDate value="${userProfile.dob}" pattern="dd/MM/yyyy"></fmt:formatDate></td> --%>
 						<%-- <td align="center"><fmt:formatDate value="${userProfile.createdDate}" pattern="dd/MM/yyyy"></fmt:formatDate></td>
 						<td align="center"><fmt:formatDate value="${userProfile.lastUpdatedDate}" pattern="dd/MM/yyyy"></fmt:formatDate></td> --%>
 						<td align="center"><a href="${pageContext.request.contextPath}/editProfileForm/${userProfile.userid}">Edit</a>

@@ -192,11 +192,11 @@ footer a {
 				<td><form:input path="mobileNo"/></td>
 				 <td><form:errors path = "mobileNo" cssClass = "errormsg" /></td>
 			</tr>
-			<tr>
+			<%-- <tr>
 				<td align="right">Date Of Birth:</td>
 				<td><form:input type="date" path="dob" size="90"/></td>
 				 <td><form:errors path = "dob" cssClass = "errormsg" /></td>
-			</tr>
+			</tr> --%>
 			 <tr>
 				<td align="right">Login Username:</td>
 				<td><form:input path="loginUsername" /></td>

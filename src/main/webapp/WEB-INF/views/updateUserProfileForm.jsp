@@ -203,14 +203,14 @@ footer a {
 				<td><form:input path="mobileNo" /></td>
 				<td><form:errors path = "mobileNo" cssClass = "errormsg" /></td>
 			</tr>
-			<tr>
+			<%-- <tr>
 				<td>Date Of Birth :</td>
 				<td width="40"><form:input type="date" path="dob"/></td>
 				 <td><form:errors path = "dob" cssClass = "errormsg" /></td>
-			</tr>
+			</tr> --%>
 			<tr>
 				<td>Login Username:</td>
-				<td><form:input path="loginUsername" /></td>
+				<td><form:input path="loginUsername" readonly="true"/></td>
 				<td><form:errors path = "loginUsername" cssClass = "errormsg" /></td>
 			</tr>
 			<tr>
